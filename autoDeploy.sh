@@ -13,8 +13,8 @@ shopt -s dotglob
 mv /home/spiffpitt/public_html/WEBD-2006-Project-master/r8mydog/* /home/spiffpitt/public_html/
 
 #update the auto deploy
-mv /home/spiffpitt/public_html/WEBD-2006-Project-master/autoDeploy.sh /home/spiffpitt/
 chmod /home/spiffpitt/autoDeploy.sh 775
+mv /home/spiffpitt/public_html/WEBD-2006-Project-master/autoDeploy.sh /home/spiffpitt/
 
 #remove uneeded files
 rm -rf /home/spiffpitt/public_html/WEBD-2006-Project-master
