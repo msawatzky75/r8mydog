@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION) && !isset($_GET)) :
-	//if not logged in, or trying to view another users profile
+if (!$_SESSION) :
+	//if not logged in
 	header("Location: login.php");
 else : ?>
 	<!DOCTYPE html>
