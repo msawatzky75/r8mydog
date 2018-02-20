@@ -2,9 +2,12 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Working on it...</title>
+		<title>r8 my dog</title>
+		<?php include 'styles.php'; ?>
 	</head>
 	<body>
-		The site is still being built, please check back soon!
+		<a href="profile.php">View your profile.</a><br>
+		<a href="register.php">Register.</a><br>
+		<a href="login.php">Login.</a><br>
 	</body>
 </html>
