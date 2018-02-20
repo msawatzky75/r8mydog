@@ -44,7 +44,17 @@
 	}
 	else
 	{
-		echo "no post";
-		//header("location: login.html");
+		?>
+		<form class="login" action="login.php" method="post">
+			<label for="email">Email:</label>
+			<input id="email" type="email" name="email" value="<?=$_GET['email']?>" required/><br>
+
+			<label for="password">Password:</label>
+			<input id="password" type="password" name="password" required/><br>
+
+			<input type="hidden" name="dest" value="profile.php" />
+			<input type="submit" name="submit" />
+		</form>
+		<?php
 	}
 ?>
