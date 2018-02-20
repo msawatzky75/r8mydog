@@ -18,10 +18,11 @@ if ($_POST)
 		$statement->execute();
 		if ($statement->rowCount() > 0)
 		{
-			die();//user exists
+			$messages[0] = 'That user already exists!';
+			$messages[1] = '<a href="login.php?email='.$email.'">Login here</a>';
 		}
 
-		if (strlen($_POST['password']) > 0 && $_POST['password'] == $_POST['confirmPassword'])
+		else if (strlen($_POST['password']) > 0 && $_POST['password'] == $_POST['confirmPassword'])
 		{
 			if (strlen($fname) > 0 && strlen($lname) > 0 && filter_var($email, FILTER_VALIDATE_EMAIL))
 			{
@@ -85,6 +86,5 @@ if ($_POST)
 		<?php foreach ($messages as $key => $value): ?>
 			<p><?=$value?></p>
 		<?php endforeach; ?>
-		<?=print_r($_POST)?>
 	</body>
 </html>
