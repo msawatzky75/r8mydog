@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<a href="profile.php">View your profile.</a><br>
-		<a href="register.php">Register.</a><br>
+		<a href="register.html">Register.</a><br>
 		<a href="login.php">Login.</a><br>
 	</body>
 </html>
