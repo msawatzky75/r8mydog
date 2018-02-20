@@ -47,7 +47,11 @@
 		?>
 		<form class="login" action="login.php" method="post">
 			<label for="email">Email:</label>
-			<input id="email" type="email" name="email" value="<?=$_GET['email']?>" required/><br>
+			<?php if (isset($_GET['email'])) : ?>
+				<input id="email" type="email" name="email" value="<?=$_GET['email']?>" required/><br>
+			<?php else : ?>
+				<input id="email" type="email" name="email" required/><br>
+			<?php endif; ?>
 
 			<label for="password">Password:</label>
 			<input id="password" type="password" name="password" required/><br>
