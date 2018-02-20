@@ -12,7 +12,7 @@ if ($_POST)
 		$pass  = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 		//verify email is not in use already
-		$query = "SELECT COUNT(*) FROM users WHERE email = :email;";
+		$query = "SELECT * FROM users WHERE email = :email;";
 		$statement = $db->prepare($query);
 		$statement->bindValue(':email', $email);
 		$statement->execute();
@@ -22,33 +22,36 @@ if ($_POST)
 			$messages[1] = '<a href="login.php?email='.$email.'">Login here</a>';
 		}
 
-		else if (strlen($_POST['password']) > 0 && $_POST['password'] == $_POST['confirmPassword'])
-		{
-			if (strlen($fname) > 0 && strlen($lname) > 0 && filter_var($email, FILTER_VALIDATE_EMAIL))
-			{
-				//insert
-				$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
-				$statement = $db->prepare($query);
-				$statement->bindValue(':fname', $fname);
-				$statement->bindValue(':lname', $lname);
-				$statement->bindValue(':email', $email);
-				$statement->bindValue(':passhash', $pass);
-				$statement->execute();
-
-				//log them in
-				require 'login.php';
-				$messages[0] = "No Errors";
-			}
-		}
 		else
 		{
-			if (isset($messages))
+			if (strlen($_POST['password']) > 0 && $_POST['password'] == $_POST['confirmPassword'])
 			{
-				$messages[sizeof($messages)] = "Passwords do not match!";
+				if (strlen($fname) > 0 && strlen($lname) > 0 && filter_var($email, FILTER_VALIDATE_EMAIL))
+				{
+					//insert
+					$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
+					$statement = $db->prepare($query);
+					$statement->bindValue(':fname', $fname);
+					$statement->bindValue(':lname', $lname);
+					$statement->bindValue(':email', $email);
+					$statement->bindValue(':passhash', $pass);
+					$statement->execute();
+
+					//log them in
+					require 'login.php';
+					$messages[0] = "No Errors";
+				}
 			}
 			else
 			{
-				$messages[0] = "Passwords do not match!";
+				if (isset($messages))
+				{
+					$messages[sizeof($messages)] = "Passwords do not match!";
+				}
+				else
+				{
+					$messages[0] = "Passwords do not match!";
+				}
 			}
 		}
 	}
