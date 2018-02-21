@@ -6,6 +6,8 @@
 </head>
 <body>
 	<?php require '../snippet/header.php'; ?>
+	<section class="container">
 
+	</section>
 </body>
 </html>
