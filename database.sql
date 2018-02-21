@@ -27,6 +27,7 @@ userid		integer(11)		not null,
 postid		integer(11)		not null,
 title		varchar(50)		not null,
 description	varchar(200)			,
+rating		integer(1)		not null,
 primary key (ratingid),
 foreign key (postid) references posts(postid),
 foreign key (userid) references users(userid)
