@@ -16,42 +16,58 @@ if ($_POST)
 		$statement = $db->prepare($query);
 		$statement->bindValue(':email', $email);
 		$statement->execute();
+
 		if ($statement->rowCount() > 0)
 		{
-			$messages[0] = 'That user already exists!';
-			$messages[1] = '<a href="login.php?email='.$email.'">Login here</a>';
+			//send back to register
+			header("location:/register?userexists");
 		}
-
 		else
 		{
 			if (strlen($_POST['password']) > 0 && $_POST['password'] == $_POST['confirmPassword'])
 			{
-				if (strlen($fname) > 0 && strlen($lname) > 0 && filter_var($email, FILTER_VALIDATE_EMAIL))
+				if (strlen($fname) > 0 && strlen($lname) > 0)
 				{
-					//insert
-					$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
-					$statement = $db->prepare($query);
-					$statement->bindValue(':fname', $fname);
-					$statement->bindValue(':lname', $lname);
-					$statement->bindValue(':email', $email);
-					$statement->bindValue(':passhash', $pass);
-					$statement->execute();
+					if (filter_var($email, FILTER_VALIDATE_EMAIL))
+						{
+							//insert
+							$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
+							$statement = $db->prepare($query);
+							$statement->bindValue(':fname', $fname);
+							$statement->bindValue(':lname', $lname);
+							$statement->bindValue(':email', $email);
+							$statement->bindValue(':passhash', $pass);
+							$statement->execute();
 
-					//log them in
-					require 'login.php';
-					$messages[0] = "No Errors";
-				}
+							//log them in
+							$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email; AND :passhash = passhash;";
+							$statement = $db->prepare($query);
+							$statement->bindValue(':email', $email);
+							$statement->bindValue(':passhash', $pass);
+							$statement->execute();
+							$row = $statement->fetch();
+
+							session_start();
+							$_SESSION['userid'] = $row['userid'];
+							$_SESSION['fname'] = $row['fname'];
+							$_SESSION['lname'] = $row['lname'];
+							$_SESSION['email'] = $row['email'];
+							$_SESSION['admin'] = $row['admin'];
+							//send back to register
+							header("location:/register?success");
+						}
+						else
+						{
+							//invalid email
+							//send back to register
+							header("location:/register?invalidemail");
+						}
+					}
 			}
 			else
 			{
-				if (isset($messages))
-				{
-					$messages[sizeof($messages)] = "Passwords do not match!";
-				}
-				else
-				{
-					$messages[0] = "Passwords do not match!";
-				}
+				//send back to register
+				header("location:/register?incorrectpassword");
 			}
 		}
 	}
@@ -59,35 +75,22 @@ if ($_POST)
 	// else if ($_POST['type'] == '')
 	// {
 	// 	$status = $tweet;
-	// 	$query = "INSERT INTO Tweets (status) VALUES (:status);";
+	// 	$query = "INSERT INTO table (col) VALUES (:col);";
 	// 	$statement = $db->prepare($query);
-	// 	$statement->bindValue(':status', $status);
+	// 	$statement->bindValue(':col', $col);
 	// 	$statement->execute();
 	// 	header('Location: index.php'); //status 302
 	// 	die();
 	// }
 	else
 	{
-		if (isset($messages))
-		{
-			$messages[sizeof($messages)] = "There was no post type attached.";
-		}
-		else
-		{
-			$messages[0] = "There was no post type attached.";
-		}
+		//no insert type
+		header("location:/");
 	}
 }
+else
+{
+	//no post
+	header("location:/");
+}
 ?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
-	<body>
-		<?php foreach ($messages as $key => $value): ?>
-			<p><?=$value?></p>
-		<?php endforeach; ?>
-	</body>
-</html>
