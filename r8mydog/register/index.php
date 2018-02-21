@@ -8,6 +8,13 @@
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
 		<br/><h1>Create a new account:</h1><br/>
+
+		<?php if(isset($_GET["success"])) : ?>
+			<div class="alert alert-success" role="alert">
+				<strong>Success!</strong> <?=$_SESSION['fname']?>, <a href="/profile">Your account</a> has been made!
+			</div>
+		<?php endif; ?>
+
 		<form action="../snippet/insertAndValidate.php" method="post">
 
 			<div class="form-row">
@@ -15,6 +22,7 @@
 					<label>Full Name:</label>
 				</div>
 			</div>
+
 			<div class="form-row">
 				<div class="col">
 					<input id="fname" class="form-control" type="text" name="fname" placeholder="First" required/>
