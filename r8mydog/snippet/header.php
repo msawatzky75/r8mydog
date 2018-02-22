@@ -4,6 +4,14 @@ $links[1] = '<a class="nav-link" href="/about">About</a>';
 session_start();
 if ($_SESSION)
 {
+	//session exists
+	if ($_SESSION['userid'] == "")
+	{
+		//if empty delete
+		session_destroy();
+		//reload
+		header("refresh:0");
+	}
 	$links[2] =
 '<li class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
