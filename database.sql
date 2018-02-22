@@ -1,34 +1,31 @@
-drop table ratings;
-drop table posts;
-drop table users;
+DROP TABLE ratings;
+DROP TABLE posts;
+DROP TABLE users;
 
-create table users(
-userid		integer(11)		not null,
-email		varchar(100)	not null,
-fname		varchar(25)		not null,
-lname		varchar(25)				,
-passhash	varchar(255)	not null,
-admin		boolean			not null,
-primary key (userid)
+CREATE TABLE users(
+userid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+email VARCHAR(100) NOT NULL,
+fname VARCHAR(25) NOT NULL,
+lname VARCHAR(25),
+passhash VARCHAR(255) NOT NULL,
+admin BOOLEAN NOT NULL
 );
 
-create table posts(
-postid		integer(11)		not null,
-userid		integer(11)		not null,
-title		varchar(50)		not null,
-description	varchar(200)			,
-primary key (postid),
-foreign key (userid) references users(userid)
+CREATE TABLE posts(
+postid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+userid INT NOT NULL,
+title VARCHAR(50) NOT NULL,
+description VARCHAR(200),
+FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
-create table ratings(
-ratingid	integer(11)		not null,
-userid		integer(11)		not null,
-postid		integer(11)		not null,
-title		varchar(50)		not null,
-description	varchar(200)			,
-rating		integer(1)		not null,
-primary key (ratingid),
-foreign key (postid) references posts(postid),
-foreign key (userid) references users(userid)
+CREATE TABLE ratings(
+ratingid  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+userid  INT NOT NULL,
+postid  INT NOT NULL,
+title VARCHAR(50) NOT NULL,
+description VARCHAR(200) ,
+rating INT NOT NULL,
+FOREIGN KEY (postid) REFERENCES posts(postid),
+FOREIGN KEY (userid) REFERENCES users(userid)
 );
