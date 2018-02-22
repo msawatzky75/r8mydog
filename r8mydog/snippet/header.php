@@ -22,6 +22,19 @@ if ($_SESSION)
 		<button type="submit" class="btn btn-dark">Search</button>
 	</div>
 </form>';
+	if ($_SESSION['admin'])
+	{
+		$links[3] =
+'<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Admin Functions
+	</a>
+	<div class="dropdown-menu" aria-labelledby="navbarAccountDropdown">
+		<a class="dropdown-item" href="/admin?editProfiles">Edit Profiles</a>
+		<a class="dropdown-item" href="/admin?editPosts">Edit Posts</a>
+	</div>
+</li>';
+	}
 }
 else
 {
