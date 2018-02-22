@@ -29,40 +29,40 @@ if ($_POST)
 				if (strlen($fname) > 0 && strlen($lname) > 0)
 				{
 					if (filter_var($email, FILTER_VALIDATE_EMAIL))
-						{
-							//insert
-							$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
-							$statement = $db->prepare($query);
-							$statement->bindValue(':fname', $fname);
-							$statement->bindValue(':lname', $lname);
-							$statement->bindValue(':email', $email);
-							$statement->bindValue(':passhash', $pass);
-							$statement->execute();
+					{
+						//insert
+						$query = "INSERT INTO users (fname, lname, email, passhash, admin) VALUES (:fname, :lname, :email, :passhash, false);";
+						$statement = $db->prepare($query);
+						$statement->bindValue(':fname', $fname);
+						$statement->bindValue(':lname', $lname);
+						$statement->bindValue(':email', $email);
+						$statement->bindValue(':passhash', $pass);
+						$statement->execute();
 
-							//log them in
-							$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email; AND :passhash = passhash;";
-							$statement = $db->prepare($query);
-							$statement->bindValue(':email', $email);
-							$statement->bindValue(':passhash', $pass);
-							$statement->execute();
-							$row = $statement->fetch();
+						//log them in
+						$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email; AND :passhash = passhash;";
+						$statement = $db->prepare($query);
+						$statement->bindValue(':email', $email);
+						$statement->bindValue(':passhash', $pass);
+						$statement->execute();
+						$row = $statement->fetch();
 
-							session_start();
-							$_SESSION['userid'] = $row['userid'];
-							$_SESSION['fname'] = $row['fname'];
-							$_SESSION['lname'] = $row['lname'];
-							$_SESSION['email'] = $row['email'];
-							$_SESSION['admin'] = $row['admin'];
-							//send back to register
-							header("location:/register?success");
-						}
-						else
-						{
-							//invalid email
-							//send back to register
-							header("location:/register?invalidemail");
-						}
+						session_start();
+						$_SESSION['userid'] = $row['userid'];
+						$_SESSION['fname'] = $row['fname'];
+						$_SESSION['lname'] = $row['lname'];
+						$_SESSION['email'] = $row['email'];
+						$_SESSION['admin'] = $row['admin'];
+						//send back to register
+						header("location:/register?success");
 					}
+					else
+					{
+						//invalid email
+						//send back to register
+						header("location:/register?invalidemail");
+					}
+				}
 			}
 			else
 			{
