@@ -7,11 +7,35 @@
 <body>
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
-		<br/><h1>Create a new account:</h1><br/>
+		<br/><h1>Create a new account:</h1>
+		<small class="badge badge-info">All fields are required</small>
+		<br/><br/>
 
+		<!--
+		possible messages:
+			success
+			invalidemail
+			incorrectpassword
+			userexists
+		-->
 		<?php if(isset($_GET["success"])) : ?>
 			<div class="alert alert-success" role="alert">
 				<strong>Success!</strong> <?=$_SESSION['fname']?>, <a href="/profile">Your account</a> has been made!
+			</div>
+		<?php endif; ?>
+		<?php if(isset($_GET["invalidemail"])) : ?>
+			<div class="alert alert-danger" role="alert">
+				<strong>Invalid email!</strong> Your email is invalid!
+			</div>
+		<?php endif; ?>
+		<?php if(isset($_GET["incorrectpassword"])) : ?>
+			<div class="alert alert-danger" role="alert">
+				<strong>Wrong password!</strong> Your passwords do not match!
+			</div>
+		<?php endif; ?>
+		<?php if(isset($_GET["userexists"])) : ?>
+			<div class="alert alert-danger" role="alert">
+				<strong>Already exists!</strong> That email is connected to an account already!
 			</div>
 		<?php endif; ?>
 
@@ -20,22 +44,23 @@
 			<div class="form-row">
 				<div class="col">
 					<label>Full Name:</label>
+					<!-- <small class="badge badge-danger">*</small> we could do this -->
 				</div>
 			</div>
 
 			<div class="form-row">
 				<div class="col">
-					<input id="fname" class="form-control" type="text" name="fname" placeholder="First" required/>
+					<input id="fname" class="form-control" type="text" name="fname" placeholder="First" <?= isset($_GET['fname']) ? 'value="'.$_GET['fname'].'"' : '' ?> required/>
 				</div>
 				<div class="col">
-					<input id="lname" class="form-control" type="text" name="lname" placeholder="Last" required/>
+					<input id="lname" class="form-control" type="text" name="lname" placeholder="Last" <?= isset($_GET['lname']) ? 'value="'.$_GET['lname'].'"' : '' ?> required/>
 				</div>
 			</div>
 			<br>
 
 			<div class="form-group">
 				<label for="email">Email:</label>
-				<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" required/>
+				<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" <?= isset($_GET['email']) ? 'value="'.$_GET['email'].'"' : '' ?> required/>
 			</div>
 
 			<div class="form-group">
