@@ -20,7 +20,7 @@ if ($_POST)
 		if ($statement->rowCount() > 0)
 		{
 			//send back to register
-			header("location:/register?userexists");
+			header("location:/register?userexists&email=".urlencode($email)."&fname=".urlencode($fname)."&lname=".urlencode($lname));
 		}
 		else
 		{
@@ -60,14 +60,14 @@ if ($_POST)
 					{
 						//invalid email
 						//send back to register
-						header("location:/register?invalidemail");
+						header("location:/register?invalidemail&email=".urlencode($email)."&fname=".urlencode($fname)."&lname=".urlencode($lname));
 					}
 				}
 			}
 			else
 			{
 				//send back to register
-				header("location:/register?incorrectpassword");
+				header("location:/register?incorrectpassword&email=".urlencode($email)."&fname=".urlencode($fname)."&lname=".urlencode($lname));
 			}
 		}
 	}
