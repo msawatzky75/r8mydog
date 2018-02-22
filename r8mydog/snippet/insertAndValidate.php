@@ -53,7 +53,6 @@ if ($_POST)
 							header("location:/register?errorAdding");
 						}
 						session_start();
-						session_destroy();
 						$_SESSION['userid'] = $row['userid'];
 						$_SESSION['fname'] = $row['fname'];
 						$_SESSION['lname'] = $row['lname'];
