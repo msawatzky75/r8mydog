@@ -20,6 +20,7 @@ if ($_POST)
 		if ($statement->rowCount() > 0)
 		{
 			//send back to register
+			//maybe send them to the login?
 			header("location:/register?userexists&email=".urlencode($email)."&fname=".urlencode($fname)."&lname=".urlencode($lname));
 		}
 		else
@@ -39,15 +40,20 @@ if ($_POST)
 						$statement->bindValue(':passhash', $pass);
 						$statement->execute();
 
-						//log them in
-						$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email; AND :passhash = passhash;";
+						//log them in, there can only be one of them
+						$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email AND :passhash = passhash;";
 						$statement = $db->prepare($query);
 						$statement->bindValue(':email', $email);
 						$statement->bindValue(':passhash', $pass);
 						$statement->execute();
 						$row = $statement->fetch();
 
+						if ($statement->rowCount() == 0)
+						{
+							header("location:/register?errorAdding");
+						}
 						session_start();
+						session_destroy();
 						$_SESSION['userid'] = $row['userid'];
 						$_SESSION['fname'] = $row['fname'];
 						$_SESSION['lname'] = $row['lname'];

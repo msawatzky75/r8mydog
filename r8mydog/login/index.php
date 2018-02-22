@@ -6,7 +6,7 @@ if ($_POST)
 	$email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 	$pass  = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-	$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email; AND :passhash = passhash";
+	$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email AND :passhash = passhash;";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':email', $email);
 	$statement->bindValue(':passhash', $pass);
