@@ -1,37 +1,43 @@
 <?php
-$notFound = false;
 if ($_POST)
 {
 	require '../snippet/connect.php';
 	$email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-	$pass  = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-	$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email AND :passhash = passhash;";
+	$query = "SELECT userid, fname, lname, email, admin, passhash FROM users WHERE :email = email;";
 	$statement = $db->prepare($query);
 	$statement->bindValue(':email', $email);
-	$statement->bindValue(':passhash', $pass);
 	$statement->execute();
 
 	//grab the user if it exists
 	if ($statement->rowCount() == 1)
 	{
 		$row = $statement->fetch();
+		if(password_verify($_POST['password'], $row['passhash']))
+		{
+			//set the session
+			session_start();
+			$_SESSION['userid'] = $row['userid'];
+			$_SESSION['fname'] = $row['fname'];
+			$_SESSION['lname'] = $row['lname'];
+			$_SESSION['email'] = $row['email'];
+			$_SESSION['admin'] = $row['admin'];
 
-		//set the session
-		session_start();
-		$_SESSION['userid'] = $row['userid'];
-		$_SESSION['fname'] = $row['fname'];
-		$_SESSION['lname'] = $row['lname'];
-		$_SESSION['email'] = $row['email'];
-		$_SESSION['admin'] = $row['admin'];
-
-		if (isset($_POST['dest']))
-			header("Location: ".$_POST['dest']);
+			if (isset($_POST['dest']))
+				header("Location: ".$_POST['dest']);
+			else
+				header("location:/browse");
+		}
 		else
-			header("location:/profile");
+		{
+			header("location:/login?incorrectpassword&email=".urlencode($email));
+
+		}
 	}
 	else
+	{
 		header("location:/login?notfound");
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -48,13 +54,19 @@ if ($_POST)
 
 			<?php if(isset($_GET["notfound"])) : ?>
 				<div class="alert alert-danger" role="alert">
-					<strong>Whoops!</strong> Your email or password is incorrect!
+					<strong>Whoops!</strong> That user doesent exist!
+				</div>
+			<?php endif; ?>
+
+			<?php if(isset($_GET["incorrectpassword"])) : ?>
+				<div class="alert alert-danger" role="alert">
+					<strong>Whoops!</strong> Your password is incorrect!
 				</div>
 			<?php endif; ?>
 
 			<div class="form-group">
 				<label for="email">Email:</label>
-				<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" required/>
+				<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" value="<?= isset($_GET['email']) ? $_GET['email'] : '' ?>" required/>
 			</div>
 
 			<div class="form-group">
