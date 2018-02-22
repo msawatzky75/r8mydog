@@ -16,23 +16,26 @@ if ($_SESSION)
 	</div>
 </li>';
 	$form =
-	'<form class="form-inline my-2 my-lg-0 hidden-sm-down" action="/search" method="get">
-		 <input class="form-control mr-sm-2" type="text" placeholder="Search">
-		 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	 </form>';
+'<form class="form-inline d-none d-lg-block" action="/search" method="get">
+	<div class="input-group">
+		<input type="text" class="form-control" name="search" placeholder="Search">
+		<button type="submit" class="btn btn-dark">Search</button>
+	</div>
+</form>';
 }
 else
 {
 	$links[2] = '<a class="nav-link" href="/register">Register</a>';
 	$links[3] = '<a class="nav-link" href="/login">Log In</a>';
 	$form =
-	'<form class="form-inline hidden-sm-down" action="/login" method="post">
+'<form class="form-inline d-none d-lg-block" action="/login" method="post">
 	<div class="input-group">
 		<input type="email" class="form-control" name="email" placeholder="Email">
 		<input type="password" class="form-control" name="password" placeholder="Password">
+		<input type="hidden" name="src" value="nav">
 		<button type="submit" class="btn btn-dark">Log in</button>
 	</div>
-	</form>';
+</form>';
 }
 ?>
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
