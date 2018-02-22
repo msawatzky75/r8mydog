@@ -17,6 +17,7 @@
 			invalidemail
 			incorrectpassword
 			userexists
+			errorAdding
 		-->
 		<?php if(isset($_GET["success"])) : ?>
 			<div class="alert alert-success" role="alert">
@@ -38,13 +39,18 @@
 				<strong>Already exists!</strong> That email is connected to an account already!
 			</div>
 		<?php endif; ?>
+		<?php if(isset($_GET["errorAdding"])) : ?>
+			<div class="alert alert-danger" role="alert">
+				<strong>Failed to create account!</strong> The user was not added due to an unknown problem.
+			</div>
+		<?php endif; ?>
 
 		<form action="../snippet/insertAndValidate.php" method="post">
 
 			<div class="form-row">
 				<div class="col">
 					<label>Full Name:</label>
-					<!-- <small class="badge badge-danger">*</small> we could do this -->
+					<!-- <small class="badge badge-pill badge-danger">*</small> we could do this -->
 				</div>
 			</div>
 
