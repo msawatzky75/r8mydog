@@ -23,6 +23,15 @@ if ($_POST)
 			$_SESSION['email'] = $row['email'];
 			$_SESSION['admin'] = $row['admin'];
 
+			if($_POST['remember'])
+			{
+				setcookie('userid', $row['userid'], time()+(86400 * 30));
+				setcookie('fname', $row['fname'], time()+(86400 * 30));
+				setcookie('lname', $row['lname'], time()+(86400 * 30));
+				setcookie('email', $row['email'], time()+(86400 * 30));
+				setcookie('admin', $row['admin'], time()+(86400 * 30));
+			}
+
 			if (isset($_POST['dest']))
 				header("Location: ".$_POST['dest']);
 			else
@@ -73,7 +82,9 @@ if ($_POST)
 				<label for="password">Password:</label>
 				<input id="password" class="form-control" type="password" name="password" required/>
 			</div>
-
+			<input id="remember" type="checkbox" name="remember" />
+			<label for="remember">Remember Me</label>
+			<br>
 			<br>
 			<input type="submit" name="submit" value="Login" />
 		</form>

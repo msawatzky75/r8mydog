@@ -2,9 +2,26 @@
 $links[0] = '<a class="nav-link" href="/browse">Browse</a>';
 $links[1] = '<a class="nav-link" href="/about">About</a>';
 session_start();
+$loggedin = false;
 if ($_SESSION)
 {
-	//session exists
+	$loggedin = true;
+}
+else
+{
+	if(isset($_COOKIE['userid']))
+	{
+		//cookies are set, log them in
+		$_SESSION['userid'] = $_COOKIE['userid'];
+		$_SESSION['fname'] = $_COOKIE['fname'];
+		$_SESSION['lname'] = $_COOKIE['lname'];
+		$_SESSION['email'] = $_COOKIE['email'];
+		$_SESSION['admin'] = $_COOKIE['admin'];
+		$loggedin = true;
+	}
+}
+if($loggedin)
+{
 	if ($_SESSION['userid'] == "")
 	{
 		//if empty delete
