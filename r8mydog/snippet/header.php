@@ -35,7 +35,7 @@ if($loggedin)
 		'.$_SESSION['fname'].'\'s Account
 	</a>
 	<div class="dropdown-menu" aria-labelledby="navbarAccountDropdown">
-		<a class="dropdown-item" href="/profile">View Profile</a>
+		<a class="dropdown-item" href="/profile?details">View Profile</a>
 		<a class="dropdown-item" href="/profile?edit">Edit Profile</a>
 		<a class="dropdown-item text-danger" href="/snippet/signOut.php">Sign Out</a>
 	</div>
