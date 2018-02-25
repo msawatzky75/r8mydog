@@ -43,7 +43,7 @@ if($loggedin)
 </li>';
 	$form =
 '<form class="form-inline d-none d-lg-block" action="/search" method="get">
-	<div class="input-group">
+	<div class="input-group btn-group">
 		<input type="text" class="form-control" name="search" placeholder="Search">
 		<button type="submit" class="btn btn-dark">Search</button>
 	</div>
