@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>http://www.r8mydog.ca/</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/about/</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/browse/</loc>
+		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/login/</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/profile/</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/profile/?details</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/register/</loc>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/search/</loc>
+	</url>
+</urlset>
