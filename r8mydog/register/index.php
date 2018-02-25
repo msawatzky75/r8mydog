@@ -21,7 +21,7 @@
 		-->
 		<?php if(isset($_GET["success"])) : ?>
 			<div class="alert alert-success" role="alert">
-				<strong>Success!</strong> <?=$_SESSION['fname']?>, <a href="/profile">Your account</a> has been made!
+				<strong>Success!</strong> <?=$_SESSION['fname']?>, <a href="/profile?details">Your account</a> has been made!
 			</div>
 		<?php endif; ?>
 		<?php if(isset($_GET["invalidemail"])) : ?>
