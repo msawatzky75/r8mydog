@@ -5,7 +5,15 @@ session_start();
 $loggedin = false;
 if ($_SESSION)
 {
-	$loggedin = true;
+	if ($_SESSION['userid'] == "")
+	{
+		//if empty delete
+		session_destroy();
+	}
+	else
+	{
+		$loggedin = true;
+	}
 }
 else
 {
@@ -22,13 +30,6 @@ else
 }
 if($loggedin)
 {
-	if ($_SESSION['userid'] == "")
-	{
-		//if empty delete
-		session_destroy();
-		//reload
-		header("refresh:0");
-	}
 	$links[2] =
 '<li class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
