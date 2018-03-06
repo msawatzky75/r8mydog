@@ -19,4 +19,4 @@ mv /home/spiffpitt/public_html/WEBD-2006-Project-master/autoDeploy.sh /home/spif
 #remove uneeded files
 rm -rf /home/spiffpitt/public_html/WEBD-2006-Project-master
 #list the files for verification
-ls /home/spiffpitt/public_html/ -AGl
+#ls /home/spiffpitt/public_html/ -AGl
