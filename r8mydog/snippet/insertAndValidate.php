@@ -103,24 +103,25 @@ if ($_POST)
 					//get postid
 					$stmt = $db->query("SELECT LAST_INSERT_ID()");
 					$lastId = $stmt->fetchColumn();
-					print("last id: ".$lastId);
+					//print("last id: ".$lastId);
 
 					//save image with postid name to /image/post/
 					$fileLocation = file_upload_path($lastId.'.'.pathinfo($_FILES['image']['name'])['extension']);
-					print ' file location: '.$fileLocation;
+					//print ' file location: '.$fileLocation;
 
 					move_uploaded_file($_FILES['image']['tmp_name'], file_upload_path($fileLocation));
 					$image = new \Gumlet\ImageResize(file_upload_path($_FILES['image']['name']));
 					$image->resizeToWidth(500);
 					$image->save(file_upload_path($lastId.'_thumb.'.pathinfo($fileLocation)['extension']);
-					//header('Location: /post?id='.$lastId); //status 302
-					//die();
+
+					header('Location: /post?id='.$lastId); //status 302
+					die();
 				}
 				else
 				{
 					//bad userid
-					print("userid: ".$_SESSION['userid']);
-					//header("location:/post/new?userid");
+					//print("userid: ".$_SESSION['userid']);
+					header("location:/post/new?userid");
 				}
 			}
 			else
