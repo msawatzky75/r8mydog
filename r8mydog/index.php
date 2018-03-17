@@ -7,8 +7,7 @@
 	<body>
 		<?php require 'snippet/header.php'; ?>
 		<section class="container">
-			<br>
-			<h1 class="text-center">r8mydog</h1>
+			<h1 class="text-center mt-3">r8mydog</h1>
 			<p class="text-center">Welcome to the worlds best hot dog rating website!</p>
 			<h4 class="text-center">Get started with just a few steps!</h4>
 			<section class="d-flex">
