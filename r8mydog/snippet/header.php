@@ -83,6 +83,7 @@ else
 	</div>
 </form>';
 }
+ksort($links);//sorts the links by key, so they display in correct order
 ?>
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
 	<a class="navbar-brand" href="/">r8mydog</a>
