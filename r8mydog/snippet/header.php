@@ -3,8 +3,8 @@ $links[0] =
 '<li class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
 	<div class="dropdown-menu" aria-labelledby="navbarPostDropdown">
-		<a class="dropdown-item" href="/posts">Browse</a>
-		<a class="dropdown-item" href="/posts/new">New</a>
+		<a class="dropdown-item" href="/post">Browse</a>
+		<a class="dropdown-item" href="/post/new">New</a>
 	</div>
 </li>';
 $links[100] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';

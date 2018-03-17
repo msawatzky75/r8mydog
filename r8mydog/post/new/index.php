@@ -3,22 +3,22 @@
 <head>
 	<title>r8mydog - New Post</title>
 	<?php include '../../snippet/bootstrap.html'; ?>
-	<link rel="stylesheet" href="/styles/img-preview.css">
+	<link rel="stylesheet" href="/style/img-preview.css">
 	<script src="/js/img-preview.js"></script>
 
 </head>
 <body>
 	<?php include '../../snippet/header.php'; ?>
 	<section class="container">
-			<form action="/snippet/insertAndValidate.php" method="post">
+			<form action="/snippet/insertAndValidate.php" method="post" enctype="multipart/form-data">
 				<h2 class="text-center mt-3">Create a new post</h2>
 
 				<div class="row">
 					<div class="col-xl-6 col-12">
 						<div class="form-group">
-							<input type="file" class="d-flex m-auto text-center" id="dogImgControl" accept="image/*" name="dog" required />
+							<input type="file" class="d-flex m-auto text-center" id="dogImgControl" accept="image/*" name="image" required />
 							<div id="imgContain" class="m-auto">
-								<img id="dogImgPreview" src="/images/noImageSelected.svg" alt="preview" class="d-block m-auto">
+								<img id="dogImgPreview" src="/image/noImageSelected.svg" alt="preview" class="d-block m-auto">
 							</div>
 						</div>
 					</div>

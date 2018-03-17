@@ -35,7 +35,7 @@ if ($_POST)
 			if (isset($_POST['dest']))
 				header("Location: ".$_POST['dest']);
 			else
-				header("location:/posts");
+				header("location:/post");
 		}
 		else
 		{
