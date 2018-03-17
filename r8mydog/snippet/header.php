@@ -88,14 +88,12 @@ ksort($links);//sorts the links by key, so they display in correct order
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
 	<a class="navbar-brand" href="/">r8mydog</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+		<span class="navbar-toggler-icon"></span>
+	</button>
 	<div class="collapse navbar-collapse" id="navbarToggle">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<?php foreach ($links as $key => $value) : ?>
-				<li class="nav-item">
 					<?= $value ?>
-				</li>
 			<?php endforeach; ?>
 		</ul>
 		<?= $form ?>
