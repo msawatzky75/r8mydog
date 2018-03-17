@@ -1,5 +1,4 @@
 <?php
-$links[1] = '<a class="nav-link" href="/about">About</a>';
 $links[0] =
 '<li class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
@@ -8,6 +7,7 @@ $links[0] =
 		<a class="dropdown-item" href="/posts/new">New</a>
 	</div>
 </li>';
+$links[100] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';
 session_start();
 $loggedin = false;
 if ($_SESSION)
