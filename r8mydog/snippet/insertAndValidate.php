@@ -6,8 +6,8 @@ if ($_POST)
 	if ($_POST['type'] == 'register')
 	{
 		//sanitize
-		$fname = filter_var($_POST['fname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$lname = filter_var($_POST['lname'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$fname = filter_var(trim($_POST['fname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$lname = filter_var(trim($_POST['lname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$email = strtolower(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 		$pass  = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
