@@ -39,10 +39,10 @@ if($loggedin)
 {
 	$links[2] =
 '<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		'.$_SESSION['fname'].'\'s Account
 	</a>
-	<div class="dropdown-menu" aria-labelledby="navbarAccountDropdown">
+	<div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
 		<a class="dropdown-item" href="/profile?details">View Profile</a>
 		<a class="dropdown-item" href="/profile?edit">Edit Profile</a>
 		<a class="dropdown-item text-danger" href="/snippet/signOut.php">Sign Out</a>
@@ -59,10 +59,10 @@ if($loggedin)
 	{
 		$links[3] =
 '<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarAccountDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		Admin Functions
 	</a>
-	<div class="dropdown-menu" aria-labelledby="navbarAccountDropdown">
+	<div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
 		<a class="dropdown-item" href="/admin?editProfiles">Edit Profiles</a>
 		<a class="dropdown-item" href="/admin?editPosts">Edit Posts</a>
 	</div>
