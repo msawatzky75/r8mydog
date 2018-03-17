@@ -1,6 +1,13 @@
 <?php
-$links[0] = '<a class="nav-link" href="/browse">Browse</a>';
 $links[1] = '<a class="nav-link" href="/about">About</a>';
+$links[0] =
+'<li class="nav-item dropdown">
+	<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
+	<div class="dropdown-menu" aria-labelledby="navbarPostDropdown">
+		<a class="dropdown-item" href="/posts">Browse</a>
+		<a class="dropdown-item" href="/posts/new">New</a>
+	</div>
+</li>';
 session_start();
 $loggedin = false;
 if ($_SESSION)
