@@ -7,8 +7,11 @@
 		<loc>http://www.r8mydog.ca/about/</loc>
 	</url>
 	<url>
-		<loc>http://www.r8mydog.ca/browse/</loc>
+		<loc>http://www.r8mydog.ca/post/</loc>
 		<priority>0.8</priority>
+	</url>
+	<url>
+		<loc>http://www.r8mydog.ca/post/new</loc>
 	</url>
 	<url>
 		<loc>http://www.r8mydog.ca/login/</loc>
