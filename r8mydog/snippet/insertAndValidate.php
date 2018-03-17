@@ -76,10 +76,69 @@ if ($_POST)
 			}
 		}
 	}
+	else if ($_POST['type'] == 'post')
+	{
+		session_start();
+		//img upload
+		//title, description
+		$title = filter_var(trim($_POST['title']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		$description = filter_var(trim($_POST['description']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+
+		if (strlen($title) > 0)
+		{
+			require 'image-tools.php';
+
+			if (isset($_FILES['image']) && $_FILES['image']['error'] == 0 && file_is_an_image($_FILES['image']['tmp_name'], $_FILES['image']['name']))
+			{
+				if ($_SESSION['userid'])
+				{
+					$query = "INSERT INTO posts (userid, title, description) VALUES (:userid, :title, :description);";
+					$statement = $db->prepare($query);
+					$statement->bindValue(':userid', $_SESSION['userid']);
+					$statement->bindValue(':title', $title);
+					$statement->bindValue(':description', strlen($description) ? $description : "");
+					$statement->execute();
+
+					//get postid
+					$stmt = $db->query("SELECT LAST_INSERT_ID()");
+					$lastId = $stmt->fetchColumn();
+					print("last id: ".$lastId);
+
+					//save image with postid name to /image/post/
+					$fileLocation = file_upload_path($lastId.'.'.pathinfo($_FILES['image']['name'])['extension']);
+					print ' file location: '.$fileLocation;
+
+					move_uploaded_file($_FILES['image']['tmp_name'], file_upload_path($fileLocation));
+					$image = new \Gumlet\ImageResize(file_upload_path($_FILES['image']['name']));
+					$image->resizeToWidth(500);
+					$image->save(file_upload_path($lastId.'_thumb.'.pathinfo($fileLocation)['extension']);
+					//header('Location: /post?id='.$lastId); //status 302
+					//die();
+				}
+				else
+				{
+					//bad userid
+					print("userid: ".$_SESSION['userid']);
+					//header("location:/post/new?userid");
+				}
+			}
+			else
+			{
+				//file upload error
+				header("location:/post/new?file=".$_FILES['image']['error']);
+			}
+		}
+		else
+		{
+			//title has no chars
+			//if this happens, someone is probably tampering
+			header("location:/post/new?title");
+		}
+	}
 	//something else we can use later
 	// else if ($_POST['type'] == '')
 	// {
-	// 	$status = $tweet;
 	// 	$query = "INSERT INTO table (col) VALUES (:col);";
 	// 	$statement = $db->prepare($query);
 	// 	$statement->bindValue(':col', $col);
