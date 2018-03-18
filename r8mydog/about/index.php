@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>r8mydog - About</title>
+	<title>About - r8mydog</title>
 	<?php require '../snippet/bootstrap.html'; ?>
 </head>
 <body>

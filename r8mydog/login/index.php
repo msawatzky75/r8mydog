@@ -52,7 +52,7 @@ if ($_POST)
 <!DOCTYPE html>
 <html>
 <head>
-	<title>r8mydog - Login</title>
+	<title>Login - r8mydog</title>
 	<?php require '../snippet/bootstrap.html'; ?>
 </head>
 <body>
