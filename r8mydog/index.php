@@ -6,6 +6,7 @@
 	</head>
 	<body>
 		<?php require 'snippet/header.php'; ?>
+		<?php if ($loggedin) { header("location:/post"); } ?>
 		<section class="container">
 			<h1 class="text-center mt-3">r8mydog</h1>
 			<p class="text-center">Welcome to the worlds best hot dog rating website!</p>
