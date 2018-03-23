@@ -25,11 +25,11 @@ if ($_POST)
 
 			if($_POST['remember'])
 			{
-				setcookie('userid', $row['userid'], time()+(86400 * 30));
-				setcookie('fname', $row['fname'], time()+(86400 * 30));
-				setcookie('lname', $row['lname'], time()+(86400 * 30));
-				setcookie('email', $row['email'], time()+(86400 * 30));
-				setcookie('admin', $row['admin'], time()+(86400 * 30));
+				// setcookie('userid', $row['userid'], time()+(86400 * 30));
+				// setcookie('fname', $row['fname'], time()+(86400 * 30));
+				// setcookie('lname', $row['lname'], time()+(86400 * 30));
+				// setcookie('email', $row['email'], time()+(86400 * 30));
+				// setcookie('admin', $row['admin'], time()+(86400 * 30));
 			}
 
 			if (isset($_POST['dest']))

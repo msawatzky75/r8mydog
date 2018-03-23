@@ -15,6 +15,7 @@ if ($_SESSION)
 	if ($_SESSION['userid'] == "")
 	{
 		//if empty delete
+		unset($_SESSION);
 		session_destroy();
 	}
 	else
@@ -24,16 +25,18 @@ if ($_SESSION)
 }
 else
 {
-	if(isset($_COOKIE['userid']))
-	{
-		//cookies are set, log them in
-		$_SESSION['userid'] = $_COOKIE['userid'];
-		$_SESSION['fname'] = $_COOKIE['fname'];
-		$_SESSION['lname'] = $_COOKIE['lname'];
-		$_SESSION['email'] = $_COOKIE['email'];
-		$_SESSION['admin'] = $_COOKIE['admin'];
-		$loggedin = true;
-	}
+	// the cookies are fucked
+
+	// if(isset($_COOKIE['userid']) && !isset($_SESSION))
+	// {
+	// 	//cookies are set, log them in
+	// 	$_SESSION['userid'] = $_COOKIE['userid'];
+	// 	$_SESSION['fname'] = $_COOKIE['fname'];
+	// 	$_SESSION['lname'] = $_COOKIE['lname'];
+	// 	$_SESSION['email'] = $_COOKIE['email'];
+	// 	$_SESSION['admin'] = $_COOKIE['admin'];
+	// 	$loggedin = true;
+	// }
 }
 if($loggedin)
 {
