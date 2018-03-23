@@ -5,7 +5,12 @@ session_start();
 $loggedin = loggedIn();
 $links = GetNavLinks($loggedin, isset($_SESSION['admin']) ? $_SESSION['admin'] : false);
 $form = GetForm($loggedin);
-
+if ($loggedin)
+{
+	//update session
+	require 'setSession.php';
+	SetSession($_SESSION['userid']);
+}
 ?>
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
 	<a class="navbar-brand" href="/">r8mydog</a>

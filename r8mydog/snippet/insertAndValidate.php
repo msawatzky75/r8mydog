@@ -40,24 +40,12 @@ if ($_POST)
 						$statement->bindValue(':passhash', $pass);
 						$statement->execute();
 
-						//log them in, there can only be one of them
-						$query = "SELECT userid, fname, lname, email, admin FROM users WHERE :email = email AND :passhash = passhash;";
-						$statement = $db->prepare($query);
-						$statement->bindValue(':email', $email);
-						$statement->bindValue(':passhash', $pass);
-						$statement->execute();
-						$row = $statement->fetch();
-
-						if ($statement->rowCount() == 0)
-						{
-							header("location:/register?errorAdding");
-						}
+						//get postid
+						$stmt = $db->query("SELECT LAST_INSERT_ID()");
+						$lastId = $stmt->fetchColumn();
 						session_start();
-						$_SESSION['userid'] = $row['userid'];
-						$_SESSION['fname'] = $row['fname'];
-						$_SESSION['lname'] = $row['lname'];
-						$_SESSION['email'] = $row['email'];
-						$_SESSION['admin'] = $row['admin'];
+						require 'setSession.php';
+						SetSession($lastId);
 						//send back to register
 						header("location:/register?success");
 					}

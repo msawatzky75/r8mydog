@@ -11,12 +11,12 @@
 			<?php if (isset($_GET['details']) || isset($_GET['edit'])) : ?>
 				<h1 class="mt-1"><?=$_SESSION['fname'].' '.$_SESSION['lname']?>'s profile <span class='badge badge-info float-right mt-2 d-none d-lg-block'><?=$_SESSION['admin'] ? "Administrator" : "Standard"?></span></h1>
 				<hr>
-				<form>
+				<form method="post" action="/snippet/updateAndValidate.php">
 					<!-- fname -->
 					<div class="form-group row">
 						<label for="email" class="col-md-2 col-form-label">First Name</label>
 						<div class="col-md-10">
-							<input type="text" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="email" value="<?=$_SESSION['fname']?>">
+							<input type="text" name="fname" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="fname" value="<?=$_SESSION['fname']?>">
 						</div>
 					</div>
 
@@ -24,7 +24,7 @@
 					<div class="form-group row">
 						<label for="email" class="col-md-2 col-form-label">Last Name</label>
 						<div class="col-md-10">
-							<input type="text" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="email" value="<?=$_SESSION['lname']?>">
+							<input type="text" name="lname" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="lname" value="<?=$_SESSION['lname']?>">
 						</div>
 					</div>
 
@@ -32,7 +32,7 @@
 					<div class="form-group row">
 						<label for="email" class="col-md-2 col-form-label">Email</label>
 						<div class="col-md-10">
-							<input type="text" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="email" value="<?=$_SESSION['email']?>">
+							<input type="email" name="email" <?= isset($_GET['details']) ? 'readonly class="form-control-plaintext"' : 'class="form-control"' ?> id="email" value="<?=$_SESSION['email']?>">
 						</div>
 					</div>
 
@@ -46,13 +46,13 @@
 
 						<?php elseif (isset($_GET['edit'])): ?>
 							<div class="col-md-2 col-sm-4">
-								<a class="btn btn-secondary col-sm-12" href="/profile?details" name="delete">Back</a>
+								<a class="btn btn-secondary col-sm-12" href="/profile?details">Back</a>
 							</div>
 							<div class="col-md-2 col-sm-4 mt-2 mt-sm-0">
-								<input class="btn btn-primary col-sm-12" action="/snippets/insertAndValidate?updateprofile" method="post" name="save" value="Save">
+								<input class="btn btn-primary col-sm-12" name="type" type="submit" value="Update">
 							</div>
 							<div class="col-md-2 col-sm-4 mt-2 mt-sm-0">
-								<a class="btn btn-danger col-sm-12" href="/profile?delete" name="delete">Delete <span class="d-none d-sm-inline d-md-none d-xl-inline">Account</span></a>
+								<input class="btn btn-danger col-sm-12" name="type" type="submit" value="Delete">
 							</div>
 
 						<?php endif; ?>
