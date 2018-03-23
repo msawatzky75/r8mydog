@@ -111,7 +111,7 @@ if ($_POST)
 
 					move_uploaded_file($_FILES['image']['tmp_name'], file_upload_path($fileLocation));
 					$image = new \Gumlet\ImageResize($fileLocation);
-					$image->resizeToWidth(500);
+					$image->resizeToWidth(200);
 					$image->save(file_upload_path($lastId.'_thumb.'.pathinfo($fileLocation)['extension']));
 
 					header('Location: /post?id='.$lastId); //status 302
