@@ -9,6 +9,7 @@
 </head>
 <body>
 	<?php include '../../snippet/header.php'; ?>
+	<?php if (!$loggedin) { header("location:/login"); } ?>
 	<section class="container">
 			<form action="/snippet/insertAndValidate.php" method="post" enctype="multipart/form-data">
 				<h2 class="text-center mt-3">Create a new post</h2>
