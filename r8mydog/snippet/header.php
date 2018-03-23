@@ -1,4 +1,10 @@
 <?php
+require 'func.php';
+session_start();
+$loggedin = loggedIn();
+
+SetNavLinks($loggedin);
+
 $links[0] =
 '<li class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
@@ -8,36 +14,7 @@ $links[0] =
 	</div>
 </li>';
 $links[100] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';
-session_start();
-$loggedin = false;
-if ($_SESSION)
-{
-	if ($_SESSION['userid'] == "")
-	{
-		//if empty delete
-		unset($_SESSION);
-		session_destroy();
-	}
-	else
-	{
-		$loggedin = true;
-	}
-}
-else
-{
-	// the cookies are fucked
 
-	// if(isset($_COOKIE['userid']) && !isset($_SESSION))
-	// {
-	// 	//cookies are set, log them in
-	// 	$_SESSION['userid'] = $_COOKIE['userid'];
-	// 	$_SESSION['fname'] = $_COOKIE['fname'];
-	// 	$_SESSION['lname'] = $_COOKIE['lname'];
-	// 	$_SESSION['email'] = $_COOKIE['email'];
-	// 	$_SESSION['admin'] = $_COOKIE['admin'];
-	// 	$loggedin = true;
-	// }
-}
 if($loggedin)
 {
 	$links[2] =
