@@ -76,15 +76,17 @@ else
 {
 	$links[2] = '<a class="nav-link" href="/register">Register</a>';
 	$links[3] = '<a class="nav-link" href="/login">Log In</a>';
-	$form =
-'<form class="form-inline d-none d-lg-block" action="/login" method="post">
-	<div class="input-group">
-		<input type="email" class="form-control" name="email" placeholder="Email">
-		<input type="password" class="form-control" name="password" placeholder="Password">
-		<input type="hidden" name="src" value="nav">
-		<button type="submit" class="btn btn-dark">Log in</button>
-	</div>
-</form>';
+	$form = '';
+	/*
+	<form class="form-inline d-none d-lg-block" action="/login" method="post">
+		<div class="input-group">
+			<input type="email" class="form-control" name="email" placeholder="Email">
+			<input type="password" class="form-control" name="password" placeholder="Password">
+			<input type="hidden" name="src" value="nav">
+			<button type="submit" class="btn btn-dark">Log in</button>
+		</div>
+	</form>
+	*/
 }
 ksort($links);//sorts the links by key, so they display in correct order
 ?>
