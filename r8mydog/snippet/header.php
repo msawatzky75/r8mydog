@@ -1,71 +1,11 @@
 <?php
 require 'func.php';
 session_start();
+
 $loggedin = loggedIn();
+$links = GetNavLinks($loggedin, isset($_SESSION['admin']) ? $_SESSION['admin'] : false);
+$form = GetForm($loggedin);
 
-SetNavLinks($loggedin);
-
-$links[0] =
-'<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
-	<div class="dropdown-menu" aria-labelledby="navbarPostDropdown">
-		<a class="dropdown-item" href="/post">Browse</a>
-		<a class="dropdown-item" href="/post/new">New</a>
-	</div>
-</li>';
-$links[100] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';
-
-if($loggedin)
-{
-	$links[2] =
-'<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		'.$_SESSION['fname'].'\'s Account
-	</a>
-	<div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
-		<a class="dropdown-item" href="/profile?details">View Profile</a>
-		<a class="dropdown-item" href="/profile?edit">Edit Profile</a>
-		<a class="dropdown-item text-danger" href="/snippet/signOut.php">Sign Out</a>
-	</div>
-</li>';
-	$form =
-'<form class="form-inline d-none d-lg-block" action="/search" method="get">
-	<div class="input-group btn-group">
-		<input type="text" class="form-control" name="search" placeholder="Search">
-		<button type="submit" class="btn btn-dark">Search</button>
-	</div>
-</form>';
-	if ($_SESSION['admin'])
-	{
-		$links[3] =
-'<li class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		Admin Functions
-	</a>
-	<div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-		<a class="dropdown-item" href="/admin?editProfiles">Edit Profiles</a>
-		<a class="dropdown-item" href="/admin?editPosts">Edit Posts</a>
-	</div>
-</li>';
-	}
-}
-else
-{
-	$links[2] = '<a class="nav-link" href="/register">Register</a>';
-	$links[3] = '<a class="nav-link" href="/login">Log In</a>';
-	$form = '';
-	/*
-	<form class="form-inline d-none d-lg-block" action="/login" method="post">
-		<div class="input-group">
-			<input type="email" class="form-control" name="email" placeholder="Email">
-			<input type="password" class="form-control" name="password" placeholder="Password">
-			<input type="hidden" name="src" value="nav">
-			<button type="submit" class="btn btn-dark">Log in</button>
-		</div>
-	</form>
-	*/
-}
-ksort($links);//sorts the links by key, so they display in correct order
 ?>
 <nav class="navbar navbar-expand-lg bg-primary navbar-dark">
 	<a class="navbar-brand" href="/">r8mydog</a>
@@ -78,6 +18,6 @@ ksort($links);//sorts the links by key, so they display in correct order
 					<?= $value ?>
 			<?php endforeach; ?>
 		</ul>
-		<?= $form ?>
+		<?= isset($form) ? $form : '' ?>
 	</div>
 </nav>

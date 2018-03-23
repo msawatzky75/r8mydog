@@ -1,5 +1,5 @@
 <?php
-function SetNavLinks($loggedin, $admin)
+function GetNavLinks($loggedin, $admin)
 {
 	if($loggedin)
 	{
@@ -22,13 +22,6 @@ function SetNavLinks($loggedin, $admin)
 									<a class="dropdown-item text-danger" href="/snippet/signOut.php">Sign Out</a>
 								</div>
 							</li>';
-		$form =
-					'<form class="form-inline d-none d-lg-block" action="/search" method="get">
-						<div class="input-group btn-group">
-							<input type="text" class="form-control" name="search" placeholder="Search">
-							<button type="submit" class="btn btn-dark">Search</button>
-						</div>
-					</form>';
 		if ($_SESSION['admin'])
 		{
 			$links[3] =
@@ -54,7 +47,6 @@ function SetNavLinks($loggedin, $admin)
 						</li>';
 		$links[2] = '<a class="nav-link" href="/register">Register</a>';
 		$links[3] = '<a class="nav-link" href="/login">Log In</a>';
-		$form = '';
 		/*
 		<form class="form-inline d-none d-lg-block" action="/login" method="post">
 			<div class="input-group">
@@ -68,6 +60,20 @@ function SetNavLinks($loggedin, $admin)
 	}
 	$links[4] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';
 	ksort($links);//sorts the links by key, so they display in correct order
+	return $links;
+}
+function GetForm($loggedin)
+{
+	if ($loggedin)
+	{
+		return '<form class="form-inline d-none d-lg-block" action="/search" method="get">
+							<div class="input-group btn-group">
+								<input type="text" class="form-control" name="search" placeholder="Search">
+								<button type="submit" class="btn btn-dark">Search</button>
+							</div>
+						</form>';
+	}
+	return '';
 }
 function loggedIn()
 {
