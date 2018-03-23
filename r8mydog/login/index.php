@@ -58,37 +58,84 @@ if ($_POST)
 <body>
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
-		<br/><h1>Log in:</h1><br/>
-		<form method="post">
+		<div class="row">
+			<div class="col-md-6 col-12">
+				<br/>
+				<h1>Log in:</h1>
+				<br/>
+				<form method="post" id="logInForm">
+					<?php if(isset($_GET["notfound"])) : ?>
+						<div class="alert alert-danger" role="alert">
+							<strong>Whoops!</strong> That user doesent exist!
+						</div>
+					<?php endif; ?>
 
-			<?php if(isset($_GET["notfound"])) : ?>
-				<div class="alert alert-danger" role="alert">
-					<strong>Whoops!</strong> That user doesent exist!
-				</div>
-			<?php endif; ?>
+					<?php if(isset($_GET["incorrectpassword"])) : ?>
+						<div class="alert alert-danger" role="alert">
+							<strong>Whoops!</strong> Your password is incorrect!
+						</div>
+					<?php endif; ?>
 
-			<?php if(isset($_GET["incorrectpassword"])) : ?>
-				<div class="alert alert-danger" role="alert">
-					<strong>Whoops!</strong> Your password is incorrect!
-				</div>
-			<?php endif; ?>
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" value="<?= isset($_GET['email']) ? $_GET['email'] : '' ?>" required/>
+					</div>
 
-			<div class="form-group">
-				<label for="email">Email:</label>
-				<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" value="<?= isset($_GET['email']) ? $_GET['email'] : '' ?>" required/>
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<input id="password" class="form-control" type="password" name="password" required/>
+					</div>
+					<input id="remember" type="checkbox" name="remember" />
+					<label for="remember">Remember Me</label>
+					<br>
+					<br>
+					<input class="btn btn-primary" type="submit" name="submit" value="Login" />
+				</form>
 			</div>
+			<div class="col-md-6 col-12">
+				<br/>
+				<h1>Register:</h1>
+				<br/>
+				<form action="../snippet/insertAndValidate.php" method="post">
 
-			<div class="form-group">
-				<label for="password">Password:</label>
-				<input id="password" class="form-control" type="password" name="password" required/>
+					<div class="form-row">
+						<div class="col">
+							<label>Full Name:</label>
+							<!-- <small class="badge badge-pill badge-danger">*</small> we could do this -->
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col">
+							<input id="fname" class="form-control" type="text" name="fname" placeholder="First" <?= isset($_GET['fname']) ? 'value="'.$_GET['fname'].'"' : '' ?> required/>
+						</div>
+						<div class="col">
+							<input id="lname" class="form-control" type="text" name="lname" placeholder="Last" <?= isset($_GET['lname']) ? 'value="'.$_GET['lname'].'"' : '' ?> required/>
+						</div>
+					</div>
+					<br>
+
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" <?= isset($_GET['email']) ? 'value="'.$_GET['email'].'"' : '' ?> required/>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<input id="password" class="form-control" type="password" name="password" required/>
+					</div>
+
+					<div class="form-group">
+						<label for="confirmPassword">Confirm Password:</label>
+						<input id="confirmPassword" class="form-control" type="password" name="confirmPassword" required/>
+					</div>
+
+					<br>
+					<input type="hidden" name="type" value="register" />
+					<input class="btn btn-primary" type="submit" name="submit" value="Create Account" />
+				</form>
 			</div>
-			<input id="remember" type="checkbox" name="remember" />
-			<label for="remember">Remember Me</label>
-			<br>
-			<br>
-			<input type="submit" name="submit" value="Login" />
-		</form>
-		<br>
+		</div>
 	</section>
 </body>
 </html>
