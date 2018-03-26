@@ -13,13 +13,15 @@
 			<section id="search" class="col-xl-3">
 				<br>
 				<h4>Search</h4>
-				<form>
+				<form id="searchForm">
+					<!-- title inupt -->
 					<div class="form-row">
 						<label for="postTitle">Title</label>
 						<input id="postTitle" class="form-control" type="text" name="postTitle" placeholder="Title" />
 					</div>
 					<br>
 
+					<!-- rating input -->
 					<div class="form-row">
 						<label for="rating">Rating</label>
 						<div id="rating" class="input-group">
@@ -32,6 +34,7 @@
 					</div>
 					<br>
 
+					<!-- user select -->
 					<div class="form-row">
 						<label for="user">Posted By</label>
 						<select class="form-control" name="user" id="users">
@@ -41,6 +44,7 @@
 					</div>
 					<br>
 
+					<!-- sort select -->
 					<div class="form-row">
 						<label for="sort">Sort by</label>
 							<select id="sort" class="form-control" name="sort">
@@ -51,6 +55,7 @@
 					</div>
 					<br>
 
+					<!-- order descending -->
 					<div class="form-row">
 						<div class="form-check">
 							<input id="order" class="form-check-input" type="checkbox" name="order" checked="true" />
@@ -59,11 +64,13 @@
 					</div>
 					<br>
 
+					<!-- submit input -->
 					<div class="form-row">
 						<div class="btn-group">
 							<input id="searchS" class="btn btn-outline-primary" type="submit" name="search" value="Search Similar" />
 						</div>
 					</div>
+
 				</form>
 			</section>
 			<section id="content" class="col-12 col-xl">
