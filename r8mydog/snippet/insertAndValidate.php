@@ -81,11 +81,12 @@ if ($_POST)
 			{
 				if ($_SESSION['userid'])
 				{
-					$query = "INSERT INTO posts (userid, title, description) VALUES (:userid, :title, :description);";
+					$query = "INSERT INTO posts (userid, title, description, imagetype) VALUES (:userid, :title, :description, :imagetype);";
 					$statement = $db->prepare($query);
 					$statement->bindValue(':userid', $_SESSION['userid']);
 					$statement->bindValue(':title', $title);
 					$statement->bindValue(':description', strlen($description) ? $description : "");
+					$statement->bindValue(':imagetype', pathinfo($_FILES['image']['name'])['extension']);
 					$statement->execute();
 
 					//get postid
