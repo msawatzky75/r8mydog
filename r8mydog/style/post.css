@@ -1,0 +1,15 @@
+.card
+{
+	border: none;
+}
+.card img
+{
+	width: 100%;
+	height: 300px;
+	object-fit: contain; /* magic */
+}
+.card-body img.rating
+{
+	height: 20px;
+	width: auto;
+}
