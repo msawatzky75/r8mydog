@@ -18,7 +18,7 @@
 					<div class="col-xl-6 col-12">
 						<div class="form-group">
 							<input type="file" class="d-flex m-auto text-center" id="dogImgControl" accept="image/*" name="image" required />
-							<div id="imgContain" class="m-auto">
+							<div id="imgContain" class="m-auto form-control">
 								<img id="dogImgPreview" src="/image/noImageSelected.svg" alt="preview" class="d-block m-auto">
 							</div>
 						</div>
@@ -27,13 +27,17 @@
 					<div class="col-xl-6 col-12">
 						<div class="form-group">
 							<label for="title" class="d-block text-center">Title</label>
-							<input id="title" type="text" class="d-block m-auto" name="title" required />
+							<input id="title" type="text" class="d-block m-auto form-control" name="title" required />
 						</div>
 
 						<div class="form-group">
 							<label for="description" class="d-block text-center">Description</label>
-							<textarea id="description" class="d-block m-auto" name="description" rows="4" cols="50" maxlength="200">My beautiful dog.</textarea>
+							<textarea id="description" class="d-block m-auto form-control" name="description" rows="4" cols="50" maxlength="200">My beautiful dog.</textarea>
 						</div>
+
+						<img id="captcha" src="/lib/securimage/securimage_show.php" class="form-control col-6 m-auto" alt="CAPTCHA Image" />
+						<input type="text" class="form-control" name="captcha_code" size="10" maxlength="6" />
+						<a href="#" onclick="document.getElementById('captcha').src = '/lib/securimage/securimage_show.php?' + Math.random(); return false">[ Different Image ]</a>
 
 						<input type="hidden" name="type" value="post" />
 						<input id="submit" type="submit" name="submit" value="Post" class="btn btn-primary d-block m-auto" />
