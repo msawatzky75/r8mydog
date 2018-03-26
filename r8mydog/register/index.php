@@ -81,7 +81,7 @@
 
 			<br>
 			<input type="hidden" name="type" value="register" />
-			<input type="submit" name="submit" value="Create Account" />
+			<input class="btn btn-primary" type="submit" name="submit" value="Create Account" />
 		</form>
 		<br>
 	</section>
