@@ -14,8 +14,8 @@
 			<section class="d-flex">
 				<ul class="mx-auto justify-content-center text-center list-unstyled">
 					<li><h5><a href="/register">Make an account</a></h5></li>
-					<li><h5><a href="/browse?new">Create a post</a></h5></li>
-					<li><h5><a href="/browse">Rate other posts</a></h5></li>
+					<li><h5><a href="/post/new">Create a post</a></h5></li>
+					<li><h5><a href="/post">Rate other posts</a></h5></li>
 				</ul>
 			</section>
 		</section>
