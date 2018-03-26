@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>r8mydog - Browse</title>
+	<title>Browse - r8mydog</title>
 	<?php require '../snippet/bootstrap.html'; ?>
 	<link rel="stylesheet" href="/style/post.css">
 	<script type="text/javascript" src="/js/post.js"></script>
