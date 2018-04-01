@@ -1,0 +1,12 @@
+{
+    "name": "spiffpitt/r8mydog",
+    "description": "Dog rating website",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matthew Sawatzky",
+            "email": "reluctantbee@gmail.com"
+        }
+    ],
+    "require": {}
+}
