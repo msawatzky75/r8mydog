@@ -6,12 +6,10 @@ if(!$_POST)
 	die();
 }
 
-
-
 require 'func.php';
 session_start();
 
-$loggedin = loggedIn();
+$loggedin = LoggedIn();
 $data = null;
 $data['postid'] =  filter_var($_POST['postid'], FILTER_SANITIZE_NUMBER_INT);
 $data['userid'] =  filter_var($_POST['userid'], FILTER_SANITIZE_NUMBER_INT);
@@ -19,10 +17,10 @@ $data['title'] =   filter_var(trim($_POST['title']), FILTER_SANITIZE_FULL_SPECIA
 $data['ratingL'] = filter_var($_POST['ratingL'], FILTER_SANITIZE_NUMBER_INT);
 $data['ratingH'] = filter_var($_POST['ratingH'], FILTER_SANITIZE_NUMBER_INT);
 $data['sort'] =    filter_var($_POST['sort'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$data['desc'] =    $_POST['desc'];//filter_var($_POST['desc'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$data['desc'] =    $_POST['desc'];//boolean
 
 if ($data['title'])
- $data['title'] = '%'.$data['title'].'%';
+	$data['title'] = '%'.$data['title'].'%';
 
 require '../snippet/connect.php';
 
