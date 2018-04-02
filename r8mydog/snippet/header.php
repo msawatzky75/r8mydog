@@ -12,7 +12,7 @@ if ($loggedin)
 	SetSession($_SESSION['userid']);
 }
 ?>
-<nav class="navbar navbar-expand-lg bg-primary navbar-dark">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 	<a class="navbar-brand" href="/">r8mydog</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
