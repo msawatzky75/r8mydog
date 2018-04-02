@@ -46,8 +46,6 @@ function GetNavLinks($loggedin, $admin)
 								<a class="dropdown-item" href="/post">Browse</a>
 							</div>
 						</li>';
-		$links[2] = '<a class="nav-link" href="/register">Register</a>';
-		$links[3] = '<a class="nav-link" href="/login">Log In</a>';
 		/*
 		<form class="form-inline d-none d-lg-block" action="/login" method="post">
 			<div class="input-group">
