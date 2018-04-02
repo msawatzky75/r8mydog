@@ -156,5 +156,13 @@ function TimeAgo($time)
 		return $diff->y.' year'.($diff->y <= 1 ? '' : 's').' ago';
 	}
 }
+function GetUserName($userid)
+{
+	require 'connect.php';
+	$query = "SELECT fname, lname FROM users WHERE userid=:userid;";
+	$statement = $db->prepare($query);
+	$statement->bindValue(':userid', $userid);
+	$statement->execute();
+	return $statement->fetch();
 }
 ?>
