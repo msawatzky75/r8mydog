@@ -96,10 +96,10 @@ $statement->execute();
 						<p class="card-text"><?=$row['description'] ? $row['description'] : "No description provided." ?></p>
 					</div>
 					<ul class="list-group list-group-flush">
-						<?php if ($loggedin && $_SESSION['admin']) : ?>
+						<!-- <?php if ($loggedin && $_SESSION['admin']) : ?>
 							<li class="list-group-item">
 								<form method="post" action="insertAndValidate.php" enctype="multipart/form-data">
-									<!-- we are not worried about tampering because only the admin can access this -->
+									we are not worried about tampering because only the admin can access this
 									<div class="row justify-content-between">
 										<input type="submit" class="col-auto btn btn-warning" name="editPost" value="Edit" />
 										<input type="submit" class="col-auto btn btn-danger" name="editPost" value="Delete" />
@@ -108,7 +108,7 @@ $statement->execute();
 									<input type="hidden" name="type" value="postedit" />
 								</form>
 							</li>
-						<?php endif; ?>
+						<?php endif; ?> -->
 						<li class="list-group-item">
 							<div class="row">
 								<div class="col-7">
