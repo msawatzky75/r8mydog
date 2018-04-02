@@ -59,39 +59,7 @@ if ($_POST)
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
 		<div class="row">
-			<div class="col-md-6 col-12">
-				<br/>
-				<h1>Log in:</h1>
-				<br/>
-				<form method="post" id="logInForm">
-					<?php if(isset($_GET["notfound"])) : ?>
-						<div class="alert alert-danger" role="alert">
-							<strong>Whoops!</strong> That user doesent exist!
-						</div>
-					<?php endif; ?>
-
-					<?php if(isset($_GET["incorrectpassword"])) : ?>
-						<div class="alert alert-danger" role="alert">
-							<strong>Whoops!</strong> Your password is incorrect!
-						</div>
-					<?php endif; ?>
-
-					<div class="form-group">
-						<label for="email">Email:</label>
-						<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" value="<?= isset($_GET['email']) ? $_GET['email'] : '' ?>" required/>
-					</div>
-
-					<div class="form-group">
-						<label for="password">Password:</label>
-						<input id="password" class="form-control" type="password" name="password" required/>
-					</div>
-					<input id="remember" type="checkbox" name="remember" />
-					<label for="remember">Remember Me</label>
-					<br>
-					<br>
-					<input class="btn btn-primary" type="submit" name="submit" value="Login" />
-				</form>
-			</div>
+			<!-- register -->
 			<div class="col-md-6 col-12">
 				<br/>
 				<h1>Register:</h1>
@@ -133,6 +101,40 @@ if ($_POST)
 					<br>
 					<input type="hidden" name="type" value="register" />
 					<input class="btn btn-primary" type="submit" name="submit" value="Create Account" />
+				</form>
+			</div>
+			<!-- login -->
+			<div class="col-md-6 col-12">
+				<br/>
+				<h1>Log in:</h1>
+				<br/>
+				<form method="post" id="logInForm">
+					<?php if(isset($_GET["notfound"])) : ?>
+						<div class="alert alert-danger" role="alert">
+							<strong>Whoops!</strong> That user doesent exist!
+						</div>
+					<?php endif; ?>
+
+					<?php if(isset($_GET["incorrectpassword"])) : ?>
+						<div class="alert alert-danger" role="alert">
+							<strong>Whoops!</strong> Your password is incorrect!
+						</div>
+					<?php endif; ?>
+
+					<div class="form-group">
+						<label for="email">Email:</label>
+						<input id="email" class="form-control" type="email" name="email" placeholder="email@domain.com" value="<?= isset($_GET['email']) ? $_GET['email'] : '' ?>" required/>
+					</div>
+
+					<div class="form-group">
+						<label for="password">Password:</label>
+						<input id="password" class="form-control" type="password" name="password" required/>
+					</div>
+					<input id="remember" type="checkbox" name="remember" />
+					<label for="remember">Remember Me</label>
+					<br>
+					<br>
+					<input class="btn btn-primary" type="submit" name="submit" value="Login" />
 				</form>
 			</div>
 		</div>
