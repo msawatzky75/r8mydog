@@ -6,6 +6,7 @@
 </head>
 <body>
 	<?php require '../snippet/header.php'; ?>
+	<?php if (!$loggedin) { header("location:/"); die(); } ?>
 	<section class="container"> <!-- maybe we should do this in js-->
 		<?php if (isset($_SESSION['userid'])) : ?>
 			<?php if (isset($_GET['details']) || isset($_GET['edit'])) : ?>
