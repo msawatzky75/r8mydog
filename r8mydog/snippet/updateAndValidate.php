@@ -3,7 +3,7 @@ if ($_POST)
 {
 	session_start();
 	require 'connect.php';
-	if ($_POST['type'] == 'Update')
+	if ($_POST['type'] == 'user')
 	{
 		$fname = filter_var(trim($_POST['fname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 		$lname = filter_var(trim($_POST['lname']), FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -31,10 +31,6 @@ if ($_POST)
 
 		header('location:/profile?details'); //status 302
 		die();
-	}
-	else if ($_POST['type'] == 'Delete')
-	{
-
 	}
 	//something else we can use later
 	// else if ($_POST['type'] == '')
