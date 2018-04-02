@@ -74,7 +74,7 @@ function GetForm($loggedin)
 	// }
 	return '';
 }
-function loggedIn()
+function LoggedIn()
 {
 	if ($_SESSION)
 	{

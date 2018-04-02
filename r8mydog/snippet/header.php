@@ -2,7 +2,7 @@
 require 'func.php';
 session_start();
 
-$loggedin = loggedIn();
+$loggedin = LoggedIn();
 $links = GetNavLinks($loggedin, isset($_SESSION['admin']) ? $_SESSION['admin'] : false);
 $form = GetForm($loggedin);
 if ($loggedin)
