@@ -127,7 +127,7 @@ if ($_POST)
 			else
 			{
 				//file upload error
-				header("location:/post/new?file=".$_FILES['image']['error']);
+				header("location:/post/new?file=".$_FILES['image']['error']."&isset=".isset($_FILES['image'])."&isimage=".file_is_an_image($_FILES['image']['tmp_name'], $_FILES['image']['name']));
 			}
 		}
 		else
