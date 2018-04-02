@@ -50,10 +50,10 @@
 								<a class="btn btn-secondary col-sm-12" href="/profile?details">Back</a>
 							</div>
 							<div class="col-md-2 col-sm-4 mt-2 mt-sm-0">
-								<input class="btn btn-primary col-sm-12" name="type" type="submit" value="Update">
+								<button class="btn btn-primary col-sm-12" name="type" type="submit" value="user">Update</button>
 							</div>
 							<div class="col-md-2 col-sm-4 mt-2 mt-sm-0">
-								<input class="btn btn-danger col-sm-12" name="type" type="submit" value="Delete">
+								<button class="btn btn-danger col-sm-12" name="type" type="submit" formaction="/snippet/delete.php" value="user">Delete</button>
 							</div>
 
 						<?php endif; ?>
