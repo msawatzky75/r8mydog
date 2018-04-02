@@ -61,7 +61,7 @@
 				</form>
 				<!-- end details veiw -->
 			<?php else : ?>
-
+				<?php header("location:/profile?details"); ?>
 			<?php endif;  //if $_GET ?>
 		<?php endif;  //if session is set ?>
 	</section>
