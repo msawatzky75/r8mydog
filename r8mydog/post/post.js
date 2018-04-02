@@ -5,7 +5,7 @@ $(document).ready(function()
 		//get all the posts
 		$.ajax({
 			async: false,//needed
-			url: '/snippet/getPosts.php',
+			url: 'getPosts.php',
 			dataType: 'json',
 			type: 'POST',
 			data:
@@ -33,9 +33,16 @@ $(document).ready(function()
 				);
 			}
 		});
-		var pageNum = getUrlParameter("pageNum") ? getUrlParameter("pageNum") : 0;
-		var postsToDisplay = getUrlParameter("posts") ? getUrlParameter("posts") : defaultPostNum;
-		showPage(pageNum, postsToDisplay);
+		if (posts)
+		{
+			var pageNum = getUrlParameter("pageNum") ? getUrlParameter("pageNum") : 0;
+			var postsToDisplay = getUrlParameter("posts") ? getUrlParameter("posts") : defaultPostNum;
+			showPage(pageNum, postsToDisplay);
+		}
+		else
+		{
+
+		}
 	}
 );
 
@@ -67,7 +74,7 @@ function showPage(pageNum, postsToDisplay)
 		{
 			$.ajax({
 				async: false,
-				url: "/snippet/getPostCard-multi.php",
+				url: "getPostCard-multi.php",
 				type: "POST",
 				data: workingPosts[post],
 				success: function (data) { $("#posts").append(data); },
@@ -86,48 +93,48 @@ function showPage(pageNum, postsToDisplay)
 //sets the pagination nav
 function setPagination(postsCount, pageNum, postsToDisplay)
 {
-	pageNum = parseInt(pageNum);
-	var totalPages = Math.ceil(postsCount / postsToDisplay);
-	var get = "";
-
-	if (window.location.search.substring(1))
+	if (postsCount > 1)
 	{
-		get = _.filter(window.location.search.substring(1).split("&"), function (str)
-			{
-				return !(str.split("=")[0] == "pageNum" || str.split("=")[0] == "posts");
-			}
-		).join("&");
-		if (get)
+		pageNum = parseInt(pageNum);
+		var totalPages = Math.ceil(postsCount / postsToDisplay);
+		var get = "";
+
+		if (window.location.search.substring(1))
 		{
-			get = "&"+get;
+			get = _.filter(window.location.search.substring(1).split("&"), function (str)
+				{
+					return !(str.split("=")[0] == "pageNum" || str.split("=")[0] == "posts");
+				}
+			).join("&");
+			if (get)
+			{
+				get = "&"+get;
+			}
 		}
-	}
 
-	$(".pagination-fill").append(`
-		<li class="page-item `+ (pageNum == 1 ? 'disabled' : '') +`">
-			<a class="page-link" href="`+("?pageNum="+(pageNum-1)+"&posts="+postsToDisplay+get)+`" aria-label="Previous">
-				<span aria-hidden="true">&laquo;</span>
-				<span class="sr-only">Previous</span>
-			</a>
-		</li>`);
+		$(".pagination-fill ul").append(
+			`<li class="page-item `+ (pageNum == 1 ? 'disabled' : '') +`">
+				<a class="page-link" href="`+("?pageNum="+(pageNum-1)+"&posts="+postsToDisplay+get)+`" aria-label="Previous">
+					<span aria-hidden="true">&laquo;</span>
+					<span class="sr-only">Previous</span>
+				</a>
+			</li>`);
 
-	var total = 7;//odd
-	var leftCap = total/2 > pageNum ? 1 : pageNum < totalPages - total/2 ? pageNum - Math.floor(total/2) : totalPages - total + 1;
-	var rightCap = total/2 > pageNum ? total : pageNum < totalPages - total/2 ? pageNum + Math.ceil(total/2) : totalPages + 1;
-	if (leftCap <= 0)
-	{
-		leftCap = 1;
+		var total = 7;//odd
+		var leftCap = total/2 > pageNum ? 1 : pageNum < totalPages - total/2 ? pageNum - Math.floor(total/2) : totalPages - total + 1;
+		var rightCap = total/2 > pageNum ? total : pageNum < totalPages - total/2 ? pageNum + Math.ceil(total/2) : totalPages + 1;
+		if (leftCap <= 0) { leftCap = 1; }
+
+		for (let i = leftCap; (i < rightCap) && (i < totalPages + 1); i++)
+		{
+			$(".pagination-fill ul").append(`<li class="page-item"><a class="page-link `+(i == pageNum ? "disabled" : "")+`" href="`+ ("?pageNum="+i+"&posts="+postsToDisplay+get) +`">`+i+`</a></li>`);
+		}
+		$(".pagination-fill ul").append(
+			`<li class="page-item `+ (pageNum == totalPages ? 'disabled' : '') +`">
+				<a class="page-link" href="`+("?pageNum="+(pageNum + 1)+"&posts="+postsToDisplay+get)+`" aria-label="Next">
+					<span aria-hidden="true">&raquo;</span>
+					<span class="sr-only">Next</span>
+				</a>
+			</li>`);
 	}
-	for (let i = leftCap; (i < rightCap) && (i < totalPages + 1); i++)
-	{
-		console.log(i);
-		$(".pagination-fill").append(`<li class="page-item"><a class="page-link `+(i == pageNum ? "disabled" : "")+`" href="`+ ("?pageNum="+i+"&posts="+postsToDisplay+get) +`">`+i+`</a></li>`);
-	}
-	$(".pagination-fill").append(`
-		<li class="page-item `+ (pageNum == totalPages ? 'disabled' : '') +`">
-			<a class="page-link" href="`+("?pageNum="+(pageNum + 1)+"&posts="+postsToDisplay+get)+`" aria-label="Next">
-				<span aria-hidden="true">&raquo;</span>
-				<span class="sr-only">Next</span>
-			</a>
-		</li>`);
 }

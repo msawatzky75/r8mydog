@@ -5,7 +5,7 @@ if(!$_POST)
 	die();
 }
 
-require 'func.php';
+require '../snippet/func.php';
 session_start();
 
 $loggedin = LoggedIn();

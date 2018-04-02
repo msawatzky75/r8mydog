@@ -1,5 +1,5 @@
 <?php
-include 'func.php';
+include '../snippet/func.php';
 session_start();
 // echo "<pre>";
 // print_r($_POST);

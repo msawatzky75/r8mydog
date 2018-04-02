@@ -3,9 +3,8 @@
 <head>
 	<title>Browse - r8mydog</title>
 	<?php require '../snippet/bootstrap.html'; ?>
-	<link rel="stylesheet" href="/style/post.css">
-	<script type="text/javascript" src="/js/post.js"></script>
-	<link rel="stylesheet" type="text/css" href="/style/search.css">
+	<link rel="stylesheet" href="post.css">
+	<script type="text/javascript" src="post.js"></script>
 </head>
 <body>
 	<?php require '../snippet/header.php'; ?>
@@ -14,7 +13,9 @@
 			<section id="content" class="col-12 col-xl">
 				<?php if (!isset($_GET["id"])) : ?>
 					<?php if (!isset($_GET["userid"])) : ?>
-						<h3 class="text-center mt-2">Today's top rated posts</h3>
+						<h3 class="text-center mt-2">
+							Today's top rated posts
+						</h3>
 
 					<?php else : ?>
 						<h3 class="text-center mt-2">
@@ -23,14 +24,14 @@
 
 					<?php endif; ?>
 					<br>
-					<nav>
-						<ul class="pagination-fill pagination pagination-lg d-flex justify-content-center"></ul>
+					<nav class="pagination-fill">
+						<ul class="pagination pagination-lg d-flex justify-content-center"></ul>
 					</nav>
 					<br>
 					<div id="posts" class="row"></div>
 					<br>
-					<nav>
-						<ul class="pagination-fill pagination pagination-lg d-flex justify-content-center"></ul>
+					<nav class="pagination-fill">
+						<ul class="pagination pagination-lg d-flex justify-content-center"></ul>
 					</nav>
 
 				<?php else : ?>
