@@ -1,59 +1,43 @@
-$(document).ready(
-	function()
+const defaultPostNum = 12;
+var posts;
+$(document).ready(function()
 	{
-		populateAllPosts();
-
-		populateUsers();
-
-		//update on value change
-		// $('input').bind("input", updateResults);
-		// $('input').change( updateResults);
-
-		$("input[type='number']").bind("input", function(){
-
-			var tempL = $("#ratingL").val();
-			var tempH = $("#ratingH").val();
-
-			if (tempL > tempH)
+		//get all the posts
+		$.ajax({
+			async: false,//needed
+			url: '/snippet/getPosts.php',
+			dataType: 'json',
+			type: 'POST',
+			data:
 			{
-				$("#ratingL").val(tempH);
-				$("#ratingH").val(tempL);
-			}
-
-			if ($("#ratingL").val() == "")
+				'postid': 0,
+				'userid': getUrlParameter('userid') ? getUrlParameter('userid') : 0,
+				'title': '',
+				'ratingL': 0,
+				'ratingH': 10,
+				'sort': 'epoch',
+				'desc': true
+			},
+			success: function(data)
 			{
-				$("#ratingL").val(0);
+				posts = _.filter(
+					_.sortBy(data, [
+						function(post) { return new Date() - new Date(post.epoch); },
+						function (post) { return 10 - post.rating; }
+						]
+					),
+					function (post)
+					{
+						return _.inRange(post.epoch, ((new Date()).setHours(0,0,0))/1000, ((new Date()).setHours(23,59,59))/1000);
+					}
+				);
 			}
-
 		});
-
-		//seacrh similar click
-		$("#searchForm").on("submit", function(e) {
-			e.preventDefault();
-			console.dir($(this).serialize());
-			updateResults();
-		});
+		var pageNum = getUrlParameter("pageNum") ? getUrlParameter("pageNum") : 0;
+		var postsToDisplay = getUrlParameter("posts") ? getUrlParameter("posts") : defaultPostNum;
+		showPage(pageNum, postsToDisplay);
 	}
 );
-
-//populates all the posts from the database
-function populateAllPosts() {
-	$.ajax({
-		url: '/snippet/post.php',
-		type: 'POST',
-		data:
-		{
-			'postid': getUrlParameter('id') ? getUrlParameter('id') : 0,
-			'userid': 0,
-			'title': '',
-			'ratingL': 0,
-			'ratingH': 10,
-			'sort': 'date',
-			'desc': false
-		},
-		success: function(data, status) { $("#posts").html(data); }
-	});
-}
 
 //gets values of the $_GET based on key
 function getUrlParameter(sParam)
@@ -73,38 +57,77 @@ function getUrlParameter(sParam)
 }
 
 //updates the posts based on the values in the search form
-function updateResults()
+function showPage(pageNum, postsToDisplay)
 {
-	//puts the posts into the #posts div in the document
-		$.ajax({
-			url: '/snippet/post.php',
-			type: 'POST',
-			data:
-			{
-				'postid': getUrlParameter('id') ? getUrlParameter('id') : 0,
-				'userid': $('#users').val(),
-				'title': $("#postTitle").val(),
-				'ratingL': $("#ratingL").val() ? $("#ratingL").val() : 0,
-				'ratingH': $('#ratingH').val() ? $('#ratingH').val() : 10,
-				'sort': $('#sort').val(),
-				'desc': $('#order').is(':checked')
-			},
-			success: function(data, status) { $("#posts").html(data); }
-		});
+	setPagination(posts.length, pageNum, postsToDisplay);
+	var workingPosts = _.chunk(_.sortBy(posts, function (post) { return 10 - post.rating; }), postsToDisplay)[pageNum - 1];
+	if(workingPosts)
+	{
+		for(var post in workingPosts)
+		{
+			$.ajax({
+				async: false,
+				url: "/snippet/getPostCard-multi.php",
+				type: "POST",
+				data: workingPosts[post],
+				success: function (data) { $("#posts").append(data); },
+				error: function(xhr, textStatus, errorThrown) { console.dir(errorThrown); }
+			});
+		}
+	}
+	else
+	{
+		if (pageNum == 0)
+			window.location.replace("?pageNum=1&posts=12");
+		console.dir(pageNum);
+	}
 }
 
-//gets all the users in the database to populate the select list
-function populateUsers() {
-	var users = null;
-	$.ajax({
-		async: false,
-		url: '/snippet/users.php',
-		contentType: 'application/json;charset=utf-8;',
-		dataType: 'json',
-		type: 'POST',
-		success: function(data) { users = data; }
-	});
-	users.forEach(function(element) {
-		$('#userGroup').append($(document.createElement('option')).attr("value", element['userid']).text(element['fullname']));
-	});
+//sets the pagination nav
+function setPagination(postsCount, pageNum, postsToDisplay)
+{
+	pageNum = parseInt(pageNum);
+	var totalPages = Math.ceil(postsCount / postsToDisplay);
+	var get = "";
+
+	if (window.location.search.substring(1))
+	{
+		get = _.filter(window.location.search.substring(1).split("&"), function (str)
+			{
+				return !(str.split("=")[0] == "pageNum" || str.split("=")[0] == "posts");
+			}
+		).join("&");
+		if (get)
+		{
+			get = "&"+get;
+		}
+	}
+
+	$(".pagination-fill").append(`
+		<li class="page-item `+ (pageNum == 1 ? 'disabled' : '') +`">
+			<a class="page-link" href="`+("?pageNum="+(pageNum-1)+"&posts="+postsToDisplay+get)+`" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				<span class="sr-only">Previous</span>
+			</a>
+		</li>`);
+
+	var total = 7;//odd
+	var leftCap = total/2 > pageNum ? 1 : pageNum < totalPages - total/2 ? pageNum - Math.floor(total/2) : totalPages - total + 1;
+	var rightCap = total/2 > pageNum ? total : pageNum < totalPages - total/2 ? pageNum + Math.ceil(total/2) : totalPages + 1;
+	if (leftCap <= 0)
+	{
+		leftCap = 1;
+	}
+	for (let i = leftCap; (i < rightCap) && (i < totalPages + 1); i++)
+	{
+		console.log(i);
+		$(".pagination-fill").append(`<li class="page-item"><a class="page-link `+(i == pageNum ? "disabled" : "")+`" href="`+ ("?pageNum="+i+"&posts="+postsToDisplay+get) +`">`+i+`</a></li>`);
+	}
+	$(".pagination-fill").append(`
+		<li class="page-item `+ (pageNum == totalPages ? 'disabled' : '') +`">
+			<a class="page-link" href="`+("?pageNum="+(pageNum + 1)+"&posts="+postsToDisplay+get)+`" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				<span class="sr-only">Next</span>
+			</a>
+		</li>`);
 }
