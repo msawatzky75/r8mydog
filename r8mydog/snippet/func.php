@@ -128,26 +128,40 @@ function TimeAgo($time)
 			{
 				if ($diff->h == 0)
 				{
-						return 'Posted '.$diff->i.' minute'.($diff->i <= 1 ? '' : 's').' ago';
+					if ($diff->i == 0)
+					{
+						return $diff->s.' second'.($diff->s == 1 ? '' : 's').' ago';
+					}
+					else
+					{
+						return $diff->i.' minute'.($diff->i <= 1 ? '' : 's').' ago';
+					}
 				}
 				else
 				{
-					return 'Posted '.$diff->h.' hour'.($diff->h <= 1 ? '' : 's').' ago';
+					return $diff->h.' hour'.($diff->h <= 1 ? '' : 's').' ago';
 				}
 			}
 			else
 			{
-				return 'Posted '.$diff->d.' day'.($diff->d <= 1 ? '' : 's').' ago';
+				if ($diff->d < 7)
+				{
+					return $diff->d.' day'.($diff->d <= 1 ? '' : 's').' ago';
+				}
+				else
+				{
+					return floor($diff->d / 7) .' week'.(floor($diff->d / 7) <= 1 ? '' : 's').' ago';
+				}
 			}
 		}
 		else
 		{
-			return 'Posted '.$diff->m.' month'.($diff->m <= 1 ? '' : 's').' ago';
+			return $diff->m.' month'.($diff->m <= 1 ? '' : 's').' ago';
 		}
 	}
 	else
 	{
-		return 'Posted '.$diff->y.' year'.($diff->y <= 1 ? '' : 's').' ago';
+		return $diff->y.' year'.($diff->y <= 1 ? '' : 's').' ago';
 	}
 	*/
 }
