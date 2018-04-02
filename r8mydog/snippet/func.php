@@ -17,6 +17,7 @@ function GetNavLinks($loggedin, $admin)
 									'.$_SESSION['fname'].'\'s Account
 								</a>
 								<div class="dropdown-menu" aria-labelledby="navbarProfileDropdown">
+									<a class="dropdown-item" href="/post?userid='.$_SESSION["userid"].'">Your Posts</a>
 									<a class="dropdown-item" href="/profile?details">View Profile</a>
 									<a class="dropdown-item" href="/profile?edit">Edit Profile</a>
 									<a class="dropdown-item text-danger" href="/snippet/signOut.php">Sign Out</a>
