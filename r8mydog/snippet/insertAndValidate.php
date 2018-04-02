@@ -92,10 +92,11 @@ if ($_POST)
 			{
 				if ($_SESSION['userid'])
 				{
-					$query = "INSERT INTO posts (userid, title, description, imagetype) VALUES (:userid, :title, :description, :imagetype);";
+					$query = "INSERT INTO posts (epoch, userid, title, description, imagetype) VALUES (:epoch, :userid, :title, :description, :imagetype);";
 					$statement = $db->prepare($query);
 					$statement->bindValue(':userid', $_SESSION['userid']);
 					$statement->bindValue(':title', $title);
+					$statement->bindValue(':epoch', time());
 					$statement->bindValue(':description', strlen($description) ? $description : "");
 					$statement->bindValue(':imagetype', pathinfo($_FILES['image']['name'])['extension']);
 					$statement->execute();
