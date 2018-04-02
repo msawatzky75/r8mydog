@@ -110,17 +110,8 @@ function loggedIn()
 function TimeAgo($time)
 {
 	date_default_timezone_set('America/Winnipeg');
-	$rowdate = DateTime::createFromFormat('Y-m-d H:i:s', $time);
-	$currentdate = new DateTime();
-	$diff = $currentdate->diff($rowdate);
-	return (($diff->y == 0) ? (($diff->m == 0) ? (($diff->d == 0) ? (($diff->h == 0) ? ($diff->i.' minute'.($diff->i <= 1 ? '' : 's').' ago') : ($diff->h.' hour'.($diff->h <= 1 ? '' : 's').' ago')) : ($diff->d.' day'.($diff->d <= 1 ? '' : 's').' ago')) : ($diff->m.' month'.($diff->m <= 1 ? '' : 's').' ago')) : ($diff->y.' year'.($diff->y <= 1 ? '' : 's').' ago'));
-	//aint this beautiful?
-	//what it was
-	/*
-	date_default_timezone_set('America/Winnipeg');
-	$rowdate = DateTime::createFromFormat('Y-m-d H:i:s', $time);
-	$currentdate = new DateTime();
-	$diff = $currentdate->diff($rowdate);
+	$diff = (new DateTime())->diff(new DateTime("@$time"));
+
 	if ($diff->y == 0)
 	{
 		if ($diff->m == 0)
@@ -164,6 +155,6 @@ function TimeAgo($time)
 	{
 		return $diff->y.' year'.($diff->y <= 1 ? '' : 's').' ago';
 	}
-	*/
+}
 }
 ?>
