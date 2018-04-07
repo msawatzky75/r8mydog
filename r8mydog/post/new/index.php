@@ -3,8 +3,8 @@
 <head>
 	<title>r8mydog - New Post</title>
 	<?php include '../../snippet/bootstrap.html'; ?>
-	<link rel="stylesheet" href="/style/img-preview.css">
-	<script src="/js/img-preview.js"></script>
+	<link rel="stylesheet" href="img-preview.css">
+	<script src="img-preview.js"></script>
 
 </head>
 <body>
@@ -32,7 +32,7 @@
 
 						<div class="form-group">
 							<label for="description" class="d-block text-center">Description</label>
-							<textarea id="description" class="d-block m-auto form-control" name="description" rows="4" cols="50" maxlength="200">My beautiful dog.</textarea>
+							<textarea id="description" class="d-block m-auto form-control" name="description" rows="4" cols="50" maxlength="200" placeholder="My Beautiful Dog."></textarea>
 						</div>
 
 						<img id="captcha" src="/lib/securimage/securimage_show.php" class="form-control col-6 m-auto" alt="CAPTCHA Image" />
