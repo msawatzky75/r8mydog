@@ -1,3 +1,14 @@
+<?php
+if (!(count($_GET) - (isset($_GET['userid']) ? 1 : 0)))
+{
+	if (!isset($_GET['page']))
+		$_GET['page'] = 1;
+	if (!isset($_GET['posts']))
+		$_GET['posts'] = 12;
+	header("location:/post?".http_build_query($_GET));
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +47,7 @@
 
 				<?php else : ?>
 					<!-- single post -->
-
+					<div id="post"></div>
 				<?php endif; ?>
 			</section>
 		</main>
