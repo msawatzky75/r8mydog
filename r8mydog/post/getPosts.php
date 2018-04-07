@@ -24,22 +24,23 @@ if ($data['title'])
 require '../snippet/connect.php';
 
 $query = "SELECT
-	posts.postid,
-	users.userid,
-	fname,
-	lname,
-	email,
-	epoch,
-	posts.title,
-	posts.description,
-	imagetype,
-	IFNULL(ROUND((SELECT AVG(rating) FROM ratings WHERE posts.postid = ratings.postid)), :defaultRating) AS \"rating\"
-FROM users JOIN posts USING (userid)".
-($data['postid'] > 0 ? "\nWHERE posts.postid = :postid" :
+		posts.postid,
+		users.userid,
+		fname,
+		lname,
+		email,
+		epoch,
+		posts.title,
+		posts.description,
+		imagetype,
+		(SELECT COUNT(ratingid) FROM ratings WHERE posts.postid = ratings.postid) AS \"totalratings\",
+		IFNULL(ROUND((SELECT AVG(rating) FROM ratings WHERE posts.postid = ratings.postid)), :defaultRating) AS \"rating\"
+	FROM users JOIN posts USING (userid)".
+	($data['postid'] > 0 ? "\nWHERE posts.postid = :postid" :
 	"\nWHERE IFNULL(ROUND((SELECT AVG(rating) FROM ratings WHERE posts.postid = ratings.postid)), :defaultRating) BETWEEN ".$data['ratingL']." AND ".$data['ratingH'].
-	($data['title'] ? "\nAND posts.title LIKE :title": "").
-	($data['userid'] > 0 ? "\nAND users.userid = :userid" : "").
-	(in_array($data["sort"], array("epoch", "rating", "title")) ? "\nORDER BY ".$data['sort']." ".($data['desc'] == 'true' ? "DESC" : "ASC") : "")
+		($data['title'] ? "\nAND posts.title LIKE :title": "").
+		($data['userid'] > 0 ? "\nAND users.userid = :userid" : "").
+		(in_array($data["sort"], array("epoch", "rating", "title")) ? "\nORDER BY ".$data['sort']." ".($data['desc'] == 'true' ? "DESC" : "ASC") : "")
 );
 //echo "<pre>".$query."</pre>";
 //bind values takes care of sql injection
