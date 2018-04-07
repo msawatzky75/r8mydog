@@ -1,3 +1,4 @@
+<?php if(isset($_GET['id'])) header("location:/post?".http_build_query($_GET)) ?>
 <!DOCTYPE html>
 <html>
 <head>
