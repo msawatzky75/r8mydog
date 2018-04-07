@@ -4,7 +4,6 @@ session_start();
 
 $loggedin = LoggedIn();
 $links = GetNavLinks($loggedin, isset($_SESSION['admin']) ? $_SESSION['admin'] : false);
-$form = GetForm($loggedin);
 if ($loggedin)
 {
 	//update session
@@ -23,6 +22,20 @@ if ($loggedin)
 					<?= $value ?>
 			<?php endforeach; ?>
 		</ul>
-		<?= isset($form) ? $form : '' ?>
+		<form class="form-inline d-none d-lg-block" action="/post/search" method="get">
+			<div class="input-group btn-group">
+				<input type="text" class="form-control" name="postTitle" placeholder="Search">
+				<button type="submit" class="btn btn-primary mr-2">Search</button>
+			</div>
+		</form>
+		<?php if ($loggedin) : ?>
+			<div class="d-none d-lg-block">
+				<a href="/snippet/signOut.php" class="btn btn-danger">Sign Out</a>
+			</div>
+		<?php else : ?>
+			<div class="d-none d-lg-block">
+				<a href="/login" class="btn btn-success">Log In / Register</a>
+			</div>
+		<?php endif; ?>
 	</div>
 </nav>

@@ -8,6 +8,7 @@ function GetNavLinks($loggedin, $admin)
 								<a class="nav-link dropdown-toggle" href="#" id="navbarPostDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Posts</a>
 								<div class="dropdown-menu" aria-labelledby="navbarPostDropdown">
 									<a class="dropdown-item" href="/post">Browse</a>
+									<a class="dropdown-item" href="/post/search">Search</a>
 									<a class="dropdown-item" href="/post/new">New</a>
 								</div>
 							</li>';
@@ -25,16 +26,7 @@ function GetNavLinks($loggedin, $admin)
 							</li>';
 		if ($_SESSION['admin'])
 		{
-			$links[3] =
-								'<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" id="navbarAdminDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Admin Functions
-									</a>
-									<div class="dropdown-menu" aria-labelledby="navbarAdminDropdown">
-										<a class="dropdown-item" href="/admin?editProfiles">Edit Profiles</a>
-										<a class="dropdown-item" href="/admin?editPosts">Edit Posts</a>
-									</div>
-								</li>';
+			$links[3] = '<li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>';
 		}
 	}
 	else
@@ -57,23 +49,19 @@ function GetNavLinks($loggedin, $admin)
 		</form>
 		*/
 	}
+	/*
+	<form class="form-inline d-none d-lg-block" action="/search" method="get">
+		<div class="input-group btn-group">
+			<input type="text" class="form-control" name="search" placeholder="Search">
+			<button type="submit" class="btn btn-dark">Search</button>
+		</div>
+	</form>
+	*/
 	$links[4] = '<li class="nav-item"><a class="nav-link" href="/about">About</a></li>';
 	ksort($links);//sorts the links by key, so they display in correct order
 	return $links;
 }
-function GetForm($loggedin)
-{
-	// if ($loggedin)
-	// {
-	// 	return '<form class="form-inline d-none d-lg-block" action="/search" method="get">
-	// 						<div class="input-group btn-group">
-	// 							<input type="text" class="form-control" name="search" placeholder="Search">
-	// 							<button type="submit" class="btn btn-dark">Search</button>
-	// 						</div>
-	// 					</form>';
-	// }
-	return '';
-}
+
 function LoggedIn()
 {
 	if ($_SESSION)
