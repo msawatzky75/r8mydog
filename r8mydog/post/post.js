@@ -22,7 +22,7 @@ $(document).ready(function()
 			data:
 			{
 				'postid': 0,
-				'userid': get('userid') ? get('userid') : 0,
+				'userid': 0,
 				'title': '',
 				'ratingL': 0,
 				'ratingH': 10,
