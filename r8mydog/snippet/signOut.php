@@ -17,4 +17,5 @@ session_destroy();
 // echo '</pre>';
 //redirect
 header("location:/");
+die();
 ?>

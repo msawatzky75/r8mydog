@@ -20,7 +20,7 @@ if (!(count($_GET) - (isset($_GET['userid']) ? 1 : 0)))
 <body>
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
-		<main class="col">
+		<section class="col">
 			<section id="content" class="col-12 col-xl">
 				<?php if (!isset($_GET["id"])) : ?>
 					<?php if (!isset($_GET["userid"])) : ?>
@@ -50,7 +50,7 @@ if (!(count($_GET) - (isset($_GET['userid']) ? 1 : 0)))
 					<div id="post"></div>
 				<?php endif; ?>
 			</section>
-		</main>
+		</section>
 	</section>
 </body>
 </html>

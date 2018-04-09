@@ -25,7 +25,6 @@ if ($_POST)
 		$statement->execute();
 
 		//update session
-		session_start();
 		require 'setSession.php';
 		SetSession($_SESSION['userid']);
 
