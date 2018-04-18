@@ -13,11 +13,20 @@
 		<br>
 		<h3 class="text-center">Search</h3>
 		<?php include 'searchForm.php' ?>
-		<main class="col">
+		<section class="col">
 			<section id="content" class="col-12 col-xl">
+				<br>
+				<nav class="pagination-fill">
+					<ul class="pagination pagination-lg d-flex justify-content-center"></ul>
+				</nav>
+				<br>
 				<div id="posts" class="row"></div>
+				<br>
+				<nav class="pagination-fill">
+					<ul class="pagination pagination-lg d-flex justify-content-center"></ul>
+				</nav>
 			</section>
-		</main>
+		</section>
 	</section>
 </body>
 </html>
