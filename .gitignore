@@ -1,4 +1,4 @@
 ~$*.docx
-r8mydog/image/post/*
+image/post/*
 *.gsheet
 todo.*

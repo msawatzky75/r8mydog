@@ -59,7 +59,7 @@ if ($_POST)
 	<?php require '../snippet/header.php'; ?>
 	<section class="container">
 		<div class="row">
-			<!-- register -->
+			<!-- register
 			<div class="col-md-6 col-12">
 				<br/>
 				<h1>Register:</h1>
@@ -69,7 +69,6 @@ if ($_POST)
 					<div class="form-row">
 						<div class="col">
 							<label>Full Name:</label>
-							<!-- <small class="badge badge-pill badge-danger">*</small> we could do this -->
 						</div>
 					</div>
 
@@ -102,7 +101,7 @@ if ($_POST)
 					<input type="hidden" name="type" value="register" />
 					<input class="btn btn-primary" type="submit" name="submit" value="Create Account" />
 				</form>
-			</div>
+			</div> -->
 			<!-- login -->
 			<div class="col-md-6 col-12">
 				<br/>
@@ -134,7 +133,8 @@ if ($_POST)
 					<label for="remember">Remember Me</label>
 					<br>
 					<br>
-					<input class="btn btn-primary" type="submit" name="submit" value="Login" />
+					<input class="btn btn-primary px-4" type="submit" name="submit" value="Login" />
+					<a href="/register" class="btn btn-secondary">Register</a>
 				</form>
 			</div>
 		</div>
