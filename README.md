@@ -1,5 +1,5 @@
 # r8mydog Content Management System
-This project is for non-profit use, a CMS rating site called **r8mydog**, where users post pictures of hotdogs that are rated by other users. I am making this for a friend who requested it for his personal use.
+This project is for non-profit use, a CMS rating site called **r8mydog**, where users post pictures of hotdogs that are rated by other users. I am making this as my final project for my college web development class. This project is incomplete and is only partially functional.
 
 ## Database
 The database will use at least these three tables, more may be added as needed.
